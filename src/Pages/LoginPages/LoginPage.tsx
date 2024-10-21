@@ -1,5 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
+import {yupResolver} from "@hookform/resolvers/yup";
 
 type Props = {}
 
@@ -14,8 +15,8 @@ const validation = Yup.object().shape({
 });
 
 const LoginPage = (props: Props) => {
-    const { loginUser } = useAuth();
-    const { register, handleSubmit, formState: { errors }} = useForm<LoginFormInputs>({ resolver: yup })
+    //const { loginUser } = useAuth();
+    //const { register, handleSubmit, formState: { errors }} = useForm<LoginFormInputs>({ resolver: yupResolver(validation) })
     return (
         <div>LoginPage</div>
     )

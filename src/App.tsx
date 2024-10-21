@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './resource/logo.svg';
 import './resource/App.css';
+import {UserProvider} from "./Context/useAuth";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {useNavigate} from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div>test1</div>
+        /*<>
+            <UserProvider>
+                <div>something</div>
+                <ToastContainer/>
+            </UserProvider>
+        </>*/
+    );
 }
 
 export default App;

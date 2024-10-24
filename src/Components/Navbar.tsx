@@ -26,6 +26,7 @@ export const Navbar = ({theme, setTheme}) => {
                 <li><Link to='/' className="menu-item">Home</Link></li>
                 <li><Link to='/about' className="menu-item">About</Link></li>
                 <li><Link to='/login' className="menu-item">Login</Link></li>
+                <li><Link to='/new-login' className="menu-item">New Login</Link></li>
             </ul>
 
             <div className='search-box'>

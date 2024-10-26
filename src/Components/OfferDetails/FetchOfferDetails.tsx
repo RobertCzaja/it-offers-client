@@ -1,8 +1,9 @@
 import axios from "axios";
 import {MockedHttp} from "../../MockedHttpConnection";
 import {ApiRoutes} from "../../ApiRoutes";
+import {HttpResponseBody} from "../../Common/HttpInterfaces";
 
-export interface OfferDetailsDto {
+export interface OfferDetailsDto extends HttpResponseBody {
     id: string,
     title: string,
     url: string,

@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid": "^10.0.0"
+    "@types/uuid": "^10.0.0",
+    "http-request-mock": "^2.0.2"
   }
 }

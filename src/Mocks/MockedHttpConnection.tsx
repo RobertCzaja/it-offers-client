@@ -1,5 +1,5 @@
 import HttpRequestMock from "http-request-mock";
-import {ApiRoutes} from "./ApiRoutes";
+import {ApiRoutes} from "../ApiRoutes";
 
 
 export class MockedHttp {

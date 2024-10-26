@@ -1,5 +1,5 @@
 import axios from "axios";
-import {MockedHttp} from "../../MockedHttpConnection";
+import {MockedHttp} from "../../Mocks/MockedHttpConnection";
 import {ApiRoutes} from "../../ApiRoutes";
 import {HttpResponseBody} from "../../Common/HttpInterfaces";
 

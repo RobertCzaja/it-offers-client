@@ -1,6 +1,7 @@
 import {OfferDetailsConnector, OfferDetailsDto} from "./OfferDetailsConnector";
 import HttpRequestMock from 'http-request-mock';
 import axios from "axios";
+import {useEffect, useState} from "react";
 
 interface OfferDetailsProps {
     offerId: string
@@ -10,6 +11,8 @@ interface OfferDetailsProps {
  * todo why is render twice
  */
 export const OfferDetails = ({offerId}: OfferDetailsProps) => {
+
+    const [offerDetails, setOfferDetails] = useState<OfferDetailsDto|null>(null);
 
     const mocker = HttpRequestMock.setup();
     mocker.mock({
@@ -21,10 +24,14 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
             'content-type': 'application/json',
             'some-header': 'value',
         },
-        body: {body: 'something'}
+        body: {
+            id: offerId,
+            title: "One Identity Consultant z j. angielskim",
+            url: "https://justjoin.it/job-offer/dmtech-polska-c-backend-developer-z-j-angielskim-iam--bydgoszcz-net",
+        }
     });
 
-    const fetch = async () => {
+    const fetchOfferDetails = async (): Promise<OfferDetailsDto> => {
         return await axios
             .get('https://www.api.com/some-api')
             .then(response => {
@@ -33,11 +40,20 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
             });
     };
 
-    fetch().then(data => {console.log(data);})
+    useEffect(() => {
+        fetchOfferDetails().then(data => setOfferDetails(data));
+    }, []);
 
     return (
         <div>
-            <div>OfferDetails {offerId}</div>
+            <div className='offer-details'>OfferDetails</div>
+            {offerDetails ? <div className='content'>
+                <ul>
+                    <li>{offerDetails.id}</li>
+                    <li>{offerDetails.title}</li>
+                    <li>{offerDetails.url}</li>
+                </ul>
+            </div> : null}
         </div>
     )
 }

@@ -5,9 +5,6 @@ interface OfferDetailsProps {
     offerId: string
 }
 
-/**
- * todo why is render twice
- */
 export const OfferDetails = ({offerId}: OfferDetailsProps) => {
 
     const [offerDetails, setOfferDetails] = useState<OfferDetailsDto|null>(null);

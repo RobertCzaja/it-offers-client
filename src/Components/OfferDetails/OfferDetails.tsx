@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import React from 'react';
 import Modal from 'react-modal';
 import offerDetailsCss from "./offerDetailsModal.css";
+import {Button, Paper} from "@mui/material";
 
 interface OfferDetailsProps {
     offerId: string
@@ -33,7 +34,9 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
 
     return (
         <div>
-            <button onClick={openModal}>Offer Details</button>
+            <Paper elevation={3} >
+                <Button variant='outlined' onClick={openModal}>Offer Details</Button>
+            </Paper>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}

@@ -11,7 +11,7 @@ export interface OfferDetailsDto {
 export const FetchOfferDetails = async (offerId: string): Promise<OfferDetailsDto> => {
     MockedHttp.offerDetails(offerId);
 
-    return await axios(ApiRoutes.OFFER_DETAILS).then(response => {
+    return await axios(ApiRoutes.OFFER_DETAILS(offerId)).then(response => {
         return response.data;
     });
 }

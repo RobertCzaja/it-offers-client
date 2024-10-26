@@ -8,7 +8,7 @@ export class MockedHttp {
 
     static offerDetails(offerId: string): void {
         MockedHttp.mocker.mock({
-            ...ApiRoutes.OFFER_DETAILS,
+            ...ApiRoutes.OFFER_DETAILS(offerId),
             ...{
                 delay: 1000,
                 status: 200,

@@ -7,5 +7,7 @@ export interface RouteInterface {
 }
 
 export class ApiRoutes {
-    static readonly OFFER_DETAILS: RouteInterface = {method: 'GET', url: UrlCreator('/offers-details')};
+    static OFFER_DETAILS(offerId: string): RouteInterface {
+        return {method: 'GET', url: UrlCreator(`/offers-details/${offerId}`)}
+    }
 }

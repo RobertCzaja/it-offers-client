@@ -16,13 +16,13 @@ import '@fontsource/roboto/700.css';
 
 function App() {
 
-    const [theme, setTheme] = useState('light');
+    //const [theme, setTheme] = useState('light');
 
     return (
         <>
             <UserProvider>
-                <div className={`container ${theme}`}>
-                    <Navbar theme={theme} setTheme={setTheme}/>
+                <div className='container'>{/*className={`container ${theme}`*/}
+                    {/* <Navbar theme={theme} setTheme={setTheme}/> */}
                     <Routes>
                         <Route path='/' element={<Home />} />
                         <Route path='/about' element={<About />} />

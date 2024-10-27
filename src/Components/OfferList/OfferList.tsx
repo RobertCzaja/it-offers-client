@@ -1,15 +1,20 @@
 import React from 'react';
 import {DataGrid, GridColDef, GridRowsProp} from '@mui/x-data-grid';
-import {MockedData} from "../../Mocks/MockedData";
-import {Chip} from "@mui/material";
+import {Chip, IconButton} from "@mui/material";
 import './OfferList.css';
+import InfoIcon from "@mui/icons-material/Info";
+import {OfferListModel} from "./OfferListModel";
 
-export const OfferList = () => {
-    const rows: GridRowsProp = MockedData.offers();
+interface OfferListProps {
+    offers: OfferListModel[];
+}
+
+export const OfferList = ({offers}: OfferListProps) => {
     const dateFormatter = new Intl.DateTimeFormat("pl-PL");
 
     const columns: GridColDef[] = [
-        { field: 'technology', headerName: 'technology', width: 100, align: "center"},
+        { field: 'technology', headerName: '', width: 50, align: "center"},
+        { field: 'seniority', headerName: 'Level', width: 75, align: "right" },
         { field: 'title', headerName: 'Job', width: 250 },
         { field: 'salaryFrom', headerName: 'From', type: 'number', width: 75 },
         { field: 'salaryTo', headerName: 'To', type: 'number', width: 75 },
@@ -21,7 +26,6 @@ export const OfferList = () => {
             width: 100,
             valueFormatter: (value) => dateFormatter.format(value),
         },
-        { field: 'seniority', headerName: 'Level', width: 100 },
         { field: 'companyName', headerName: 'Company', width: 100 },
         { field: 'companyCity', headerName: 'City', width: 100 },
         {
@@ -34,11 +38,20 @@ export const OfferList = () => {
                 )}
             </>
         },
+        {
+            field: 'id',
+            headerName: 'Action',
+            width: 100,
+            sortable: false,
+            renderCell: (params) => <IconButton aria-label="details" size="small">
+                <InfoIcon />
+            </IconButton>
+        }
     ];
 
     return (
         <div className='offer-list'>
-            <DataGrid rows={rows} columns={columns} />
+            <DataGrid rows={offers} columns={columns} />
         </div>
     );
 }

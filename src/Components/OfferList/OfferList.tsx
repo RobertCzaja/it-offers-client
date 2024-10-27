@@ -1,9 +1,10 @@
-import React from 'react';
-import {DataGrid, GridColDef, GridRowsProp} from '@mui/x-data-grid';
+import React, {BaseSyntheticEvent, useState} from 'react';
+import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import {Chip, IconButton} from "@mui/material";
 import './OfferList.css';
 import InfoIcon from "@mui/icons-material/Info";
 import {OfferListModel} from "./OfferListModel";
+import {OfferDetailsModal} from "../OfferDetails/OfferDetailsModal";
 
 interface OfferListProps {
     offers: OfferListModel[];
@@ -11,6 +12,13 @@ interface OfferListProps {
 
 export const OfferList = ({offers}: OfferListProps) => {
     const dateFormatter = new Intl.DateTimeFormat("pl-PL");
+    const [open, setOpen] = useState<boolean>(false);
+    const [offerId, setOfferId] = useState<string|null>(null);
+    const handleOpen = (e: BaseSyntheticEvent, offerId: string) => {
+        setOfferId(offerId);
+        setOpen(true);
+    };
+    const handleClose = () => setOpen(false);
 
     const columns: GridColDef[] = [
         { field: 'technology', headerName: '', width: 50, align: "center"},
@@ -43,8 +51,9 @@ export const OfferList = ({offers}: OfferListProps) => {
             headerName: 'Action',
             width: 100,
             sortable: false,
-            renderCell: (params) => <IconButton aria-label="details" size="small">
-                <InfoIcon />
+            renderCell: (params) =>
+            <IconButton aria-label="details" size="small" onClick={(e) => handleOpen(e, params.value)}>
+                <InfoIcon/>
             </IconButton>
         }
     ];
@@ -52,6 +61,7 @@ export const OfferList = ({offers}: OfferListProps) => {
     return (
         <div className='offer-list'>
             <DataGrid rows={offers} columns={columns} />
+            <OfferDetailsModal open={open} handleClose={handleClose} offerId={offerId}/>
         </div>
     );
 }

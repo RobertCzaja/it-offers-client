@@ -1,3 +1,4 @@
+import React from 'react';
 import {OfferList} from "./OfferList/OfferList";
 import {MockedData} from "../Mocks/MockedData";
 

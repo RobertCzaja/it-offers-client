@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Modal, Typography } from "@mui/material";
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface OfferDetailsModalProps {
     open: boolean;
@@ -7,33 +14,52 @@ interface OfferDetailsModalProps {
     offerId: string|null,
 }
 
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+        padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+        padding: theme.spacing(1),
+    },
+}));
+
 export const OfferDetailsModal = ({open, handleClose, offerId}: OfferDetailsModalProps) => {
     return (
-        <div>
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
+        <BootstrapDialog
+            onClose={handleClose}
+            aria-labelledby="customized-dialog-title"
+            open={open}
+            maxWidth='xl'
+        >
+            <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+                Offer
+            </DialogTitle>
+            <IconButton
+                aria-label="close"
+                onClick={handleClose}
+                sx={(theme) => ({
+                    position: 'absolute',
+                    right: 8,
+                    top: 8,
+                    color: theme.palette.grey[500],
+                })}
             >
-                <Box
-                    sx={{
-                        backgroundColor: "#e0e0e0",
-                        position: "absolute",
-                        width: "50%",
-                        mt: "15%",
-                        ml: "25%",
-                    }}
-                >
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{mt: 2}}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                    <Typography>{offerId}</Typography>
-                </Box>
-            </Modal>
-        </div>
+                <CloseIcon />
+            </IconButton>
+            <DialogContent dividers sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                m: 'auto',
+                width: '80vw',
+                height: '80vh'
+            }}>
+
+            </DialogContent>
+            <DialogActions>
+                <Button autoFocus onClick={handleClose}>
+                    Save changes
+                </Button>
+            </DialogActions>
+        </BootstrapDialog>
     );
 }

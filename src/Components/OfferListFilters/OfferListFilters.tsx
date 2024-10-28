@@ -1,30 +1,42 @@
 import React, {useState} from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import {Dayjs} from "dayjs";
+import dayjs, {Dayjs} from "dayjs";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {ToggleButton, ToggleButtonGroup} from "@mui/material";
+import './OfferListFilters.css';
+import {PublishedAtScope} from "./OfferListFiltersModel";
 
 export const OfferListFilters = () => {
-    // todo this month e.g. since 1-10-2024 to 27-10-2024
-    // todo last month, dwo months ago
-    // todo add validation 'from' cannot be greater that 'to'
-
     const [publishedAtFrom, setPublishedAtFrom] = useState<Dayjs|null>(null);
     const [publishedAtTo, setPublishedAtTo] = useState<Dayjs|null>(null);
-    const [publishedAtScope, setPublishedAtScope] = useState('thisMonth');
+    const [publishedAtScope, setPublishedAtScope] = useState<PublishedAtScope|null>(null);
 
-    const handlePublishedAtScopeChange = (
-        event: React.MouseEvent<HTMLElement>,
-        newAlignment: string,
-    ) => {
-        console.log(newAlignment);
-        //set publishedAtFrom & publishedAtTo
-        setPublishedAtScope(newAlignment);
+    const handlePublishedAtScopeChange = (event: React.MouseEvent<HTMLElement>, scope: PublishedAtScope) => {
+        var from: Dayjs|null = null;
+        var to: Dayjs|null = null;
+
+        switch (scope) {
+            case (PublishedAtScope.THIS_MONTH):
+                from = dayjs().startOf('month');
+                to = dayjs();
+                break;
+            case (PublishedAtScope.LAST_MONTH):
+                from = dayjs().subtract(1,'month').startOf('month');
+                to = dayjs().subtract(1, 'month').endOf('month');
+                break;
+            case (PublishedAtScope.PENULTIMATE_MONTH):
+                from = dayjs().subtract(2,'month').startOf('month');
+                to = dayjs().subtract(2, 'month').endOf('month');
+                break;
+            default:
+                throw new Error('Unknown publishedAt scope');
+        }
+
+        setPublishedAtFrom(from);
+        setPublishedAtTo(to);
+        setPublishedAtScope(scope);
     };
-
-    console.log(publishedAtFrom);
-    console.log(publishedAtTo);
 
     return (
         <div className='offer-list-filters'>
@@ -32,12 +44,15 @@ export const OfferListFilters = () => {
                 color="primary"
                 value={publishedAtScope}
                 exclusive
+                size="small"
                 onChange={handlePublishedAtScopeChange}
                 aria-label="Published at period"
             >
-                <ToggleButton value="thisMonth">This</ToggleButton>
-                <ToggleButton value="lastMonth">Last</ToggleButton>
-                <ToggleButton value="penultimateMonth">Penultimate</ToggleButton>
+                <ToggleButton value={PublishedAtScope.THIS_MONTH}>This</ToggleButton>
+                <ToggleButton value={PublishedAtScope.LAST_MONTH}>Last</ToggleButton>
+                <ToggleButton value={PublishedAtScope.PENULTIMATE_MONTH}>Penultimate</ToggleButton>
+                <ToggleButton value="" disabled>Month</ToggleButton>
+                Month
             </ToggleButtonGroup>
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>

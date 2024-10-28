@@ -6,6 +6,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {Grid2, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import './OfferListFilters.css';
 import {PublishedAtScope} from "./OfferListFiltersModel";
+import {MultiSelect} from "../../Common/MultiSelect/MultiSelect";
+import {JobTechnologies} from "./JobTechnologies";
 
 export const OfferListFilters = () => {
     const [publishedAtFrom, setPublishedAtFrom] = useState<Dayjs|null>(null);
@@ -45,35 +47,41 @@ export const OfferListFilters = () => {
     return (
         <div className='offer-list-filters'>
             <Grid2 container spacing={2}>
-                <ToggleButtonGroup
-                    color="primary"
-                    value={publishedAtScope}
-                    exclusive
-                    size="small"
-                    onChange={handlePublishedAtScopeChange}
-                    aria-label="Published at period"
-                >
-                    <ToggleButton value={PublishedAtScope.THIS_MONTH}>This</ToggleButton>
-                    <ToggleButton value={PublishedAtScope.LAST_MONTH}>Last</ToggleButton>
-                    <ToggleButton value={PublishedAtScope.PENULTIMATE_MONTH}>Penultimate</ToggleButton>
-                    <ToggleButton value="" disabled>Month</ToggleButton>
-                    Month
-                </ToggleButtonGroup>
+                <Grid2 size={12}>
+                    <MultiSelect title='Technologies' options={JobTechnologies()}/>
+                </Grid2>
+                <Grid2 size={12} container spacing={2}>
+                    <ToggleButtonGroup
+                        color="primary"
+                        value={publishedAtScope}
+                        exclusive
+                        size="small"
+                        onChange={handlePublishedAtScopeChange}
+                        aria-label="Published at period"
+                    >
+                        <ToggleButton value={PublishedAtScope.THIS_MONTH}>This</ToggleButton>
+                        <ToggleButton value={PublishedAtScope.LAST_MONTH}>Last</ToggleButton>
+                        <ToggleButton value={PublishedAtScope.PENULTIMATE_MONTH}>Penultimate</ToggleButton>
+                        <ToggleButton value="" disabled>Month</ToggleButton>
+                        Month
+                    </ToggleButtonGroup>
 
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        label="Published from"
-                        value={publishedAtFrom}
-                        slotProps={{ textField: { size: 'small' } }}
-                        onChange={(value) => setPublishedAtFrom(value)}
-                    />
-                    <DatePicker
-                        label="Published to"
-                        value={publishedAtTo}
-                        slotProps={{ textField: { size: 'small' } }}
-                        onChange={(value) => setPublishedAtTo(value)}
-                    />
-                </LocalizationProvider>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker
+                            label="Published from"
+                            value={publishedAtFrom}
+                            slotProps={{ textField: { size: 'small' } }}
+                            onChange={(value) => setPublishedAtFrom(value)}
+                        />
+                        <DatePicker
+                            label="Published to"
+                            value={publishedAtTo}
+                            slotProps={{ textField: { size: 'small' } }}
+                            onChange={(value) => setPublishedAtTo(value)}
+                        />
+                    </LocalizationProvider>
+                </Grid2>
+
             </Grid2>
         </div>
     )

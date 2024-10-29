@@ -7,7 +7,6 @@ import {Route, Routes, useNavigate} from "react-router-dom";
 import {Home} from "./Components/Home";
 import {Navbar} from "./Components/Navbar";
 import LoginPage from "./Pages/LoginPages/LoginPage";
-import LoginForm from "./Components/LoginForm/LoginForm";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -22,7 +21,6 @@ function App() {
                     <Routes>
                         <Route path='/' element={<Home />} />
                         <Route path='/login' element={<LoginPage />} />
-                        <Route path='/new-login' element={<LoginForm />} />
                     </Routes>
                 </div>
 

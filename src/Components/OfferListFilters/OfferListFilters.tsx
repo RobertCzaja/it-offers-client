@@ -47,9 +47,6 @@ export const OfferListFilters = () => {
     return (
         <div className='offer-list-filters'>
             <Grid2 container spacing={2}>
-                <Grid2 size={12}>
-                    <MultiSelect title='Technologies' options={JobTechnologies()}/>
-                </Grid2>
                 <Grid2 size={12} container spacing={2}>
                     <ToggleButtonGroup
                         color="primary"
@@ -81,7 +78,9 @@ export const OfferListFilters = () => {
                         />
                     </LocalizationProvider>
                 </Grid2>
-
+                <Grid2 size={12}>
+                    <MultiSelect title='Technologies' options={JobTechnologies()}/>
+                </Grid2>
             </Grid2>
         </div>
     )

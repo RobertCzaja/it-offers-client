@@ -20,7 +20,7 @@ export const MultiSelect = ({title, options}: MultiSelectProps) => {
     const [selectedNames, setSelectedNames] = useState<string[]>([]);
 
     return (
-        <FormControl sx={{ m: 1, width: 300 }}>
+        <FormControl sx={{ width: 509}} size="small">
             <InputLabel>{title}</InputLabel>
             <Select
                 multiple

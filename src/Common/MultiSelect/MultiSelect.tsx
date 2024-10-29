@@ -14,19 +14,19 @@ import CheckIcon from "@mui/icons-material/Check";
 interface MultiSelectProps {
     title: string,
     options: string[],
+    selected: string[],
+    setSelected: (newSelected: string[]) => void,
 }
 
-export const MultiSelect = ({title, options}: MultiSelectProps) => {
-    const [selectedNames, setSelectedNames] = useState<string[]>([]);
-
+export const MultiSelect = ({title, options, selected, setSelected}: MultiSelectProps) => {
     return (
         <FormControl sx={{ width: 509}} size="small">
             <InputLabel>{title}</InputLabel>
             <Select
                 multiple
-                value={selectedNames}
+                value={selected}
                 onChange={(e) => /* @ts-ignore */
-                    setSelectedNames(e.target.value)
+                    setSelected(e.target.value)
                 }
                 input={<OutlinedInput label="Multiple Select" />}
                 renderValue={(selected) => (
@@ -35,9 +35,10 @@ export const MultiSelect = ({title, options}: MultiSelectProps) => {
                             <Chip
                                 key={value}
                                 label={value}
+                                size='small'
                                 onDelete={() =>
-                                    setSelectedNames(
-                                        selectedNames.filter((item) => item !== value)
+                                    setSelected(
+                                        selected.filter((item) => item !== value)
                                     )
                                 }
                                 deleteIcon={
@@ -57,7 +58,7 @@ export const MultiSelect = ({title, options}: MultiSelectProps) => {
                         sx={{ justifyContent: "space-between" }}
                     >
                         {name}
-                        {selectedNames.includes(name) ? <CheckIcon color="info" /> : null}
+                        {selected.includes(name) ? <CheckIcon color="info" /> : null}
                     </MenuItem>
                 ))}
             </Select>

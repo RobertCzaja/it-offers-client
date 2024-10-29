@@ -3,7 +3,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, {Dayjs} from "dayjs";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import {Grid2, ToggleButton, ToggleButtonGroup} from "@mui/material";
+import {Button, Grid2, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import './OfferListFilters.css';
 import {PublishedAtScope} from "./OfferListFiltersModel";
 import {MultiSelect} from "../../Common/MultiSelect/MultiSelect";
@@ -13,6 +13,7 @@ export const OfferListFilters = () => {
     const [publishedAtFrom, setPublishedAtFrom] = useState<Dayjs|null>(null);
     const [publishedAtTo, setPublishedAtTo] = useState<Dayjs|null>(null);
     const [publishedAtScope, setPublishedAtScope] = useState<PublishedAtScope|null>(null);
+    const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
     const handlePublishedAtScopeChange = (event: React.MouseEvent<HTMLElement>, scope: PublishedAtScope) => {
         var from: Dayjs|null = null;
@@ -43,6 +44,11 @@ export const OfferListFilters = () => {
         setPublishedAtTo(to);
         setPublishedAtScope(scope);
     };
+
+    /* todo needs to be implemented */
+    const fetch = () => {
+        console.log(publishedAtFrom, publishedAtTo, selectedTechnologies);
+    }
 
     return (
         <div className='offer-list-filters'>
@@ -78,8 +84,16 @@ export const OfferListFilters = () => {
                         />
                     </LocalizationProvider>
                 </Grid2>
-                <Grid2 size={12}>
-                    <MultiSelect title='Technologies' options={JobTechnologies()}/>
+                <Grid2 size={12} container spacing={2}>
+                    <MultiSelect
+                        title='Technologies'
+                        options={JobTechnologies()}
+                        selected={selectedTechnologies}
+                        setSelected={setSelectedTechnologies}
+                    />
+                    <Button variant="outlined" sx={{ width: 231 }} onClick={fetch}>
+                        Search
+                    </Button>
                 </Grid2>
             </Grid2>
         </div>

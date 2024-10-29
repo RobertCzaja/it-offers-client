@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, {Dayjs} from "dayjs";
+import {Dayjs} from "dayjs";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {Button, Grid2, ToggleButton, ToggleButtonGroup} from "@mui/material";
@@ -8,6 +8,7 @@ import './OfferListFilters.css';
 import {PublishedAtScope} from "./OfferListFiltersModel";
 import {MultiSelect} from "../../Common/MultiSelect/MultiSelect";
 import {JobTechnologies} from "./JobTechnologies";
+import {DateScope, DateScopeType} from "./DateScope";
 
 export const OfferListFilters = () => {
     const [publishedAtFrom, setPublishedAtFrom] = useState<Dayjs|null>(null);
@@ -16,32 +17,9 @@ export const OfferListFilters = () => {
     const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
 
     const handlePublishedAtScopeChange = (event: React.MouseEvent<HTMLElement>, scope: PublishedAtScope) => {
-        var from: Dayjs|null = null;
-        var to: Dayjs|null = null;
-
-        switch (scope) {
-            case (null):
-                from = null;
-                to = null;
-                break;
-            case (PublishedAtScope.THIS_MONTH):
-                from = dayjs().startOf('month');
-                to = dayjs();
-                break;
-            case (PublishedAtScope.LAST_MONTH):
-                from = dayjs().subtract(1,'month').startOf('month');
-                to = dayjs().subtract(1, 'month').endOf('month');
-                break;
-            case (PublishedAtScope.PENULTIMATE_MONTH):
-                from = dayjs().subtract(2,'month').startOf('month');
-                to = dayjs().subtract(2, 'month').endOf('month');
-                break;
-            default:
-                throw new Error('Unknown publishedAt scope: '+scope);
-        }
-
-        setPublishedAtFrom(from);
-        setPublishedAtTo(to);
+        const dateScope: DateScopeType = DateScope(scope);
+        setPublishedAtFrom(dateScope.from);
+        setPublishedAtTo(dateScope.to);
         setPublishedAtScope(scope);
     };
 

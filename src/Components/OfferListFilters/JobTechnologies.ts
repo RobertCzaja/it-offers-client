@@ -2,5 +2,9 @@
 
 export const JobTechnologies = (): string[] => [
     'php',
-    'java'
+    'java',
+    'devops',
+    'net',
+    'javascript',
+    'admin',
 ]

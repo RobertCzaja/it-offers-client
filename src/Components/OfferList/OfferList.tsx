@@ -13,7 +13,7 @@ interface OfferListProps {
 export const OfferList = ({offers}: OfferListProps) => {
     const dateFormatter = new Intl.DateTimeFormat("pl-PL");
     const [open, setOpen] = useState<boolean>(false);
-    const [offerId, setOfferId] = useState<string|null>(null);
+    const [offerId, setOfferId] = useState<string>();
     const handleOpen = (e: BaseSyntheticEvent, offerId: string) => {
         setOfferId(offerId);
         setOpen(true);
@@ -61,7 +61,7 @@ export const OfferList = ({offers}: OfferListProps) => {
     return (
         <div className='offer-list'>
             <DataGrid rows={offers} columns={columns} />
-            <OfferDetailsModal open={open} handleClose={handleClose} offerId={offerId}/>
+            {offerId ? <OfferDetailsModal open={open} handleClose={handleClose} offerId={offerId}/> : null}
         </div>
     );
 }

@@ -8,11 +8,12 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Box, Tab, Tabs} from "@mui/material";
+import {OfferDetails} from "./OfferDetails";
 
 interface OfferDetailsModalProps {
     open: boolean;
     handleClose: () => void,
-    offerId: string|null,
+    offerId: string,
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -30,6 +31,7 @@ interface TabPanelProps {
     value: number;
 }
 
+/* todo name to change */
 function CustomTabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
 
@@ -39,9 +41,10 @@ function CustomTabPanel(props: TabPanelProps) {
             hidden={value !== index}
             id={`simple-tabpanel-${index}`}
             aria-labelledby={`simple-tab-${index}`}
+            style={{height: '100%'}} /*todo move to css*/
             {...other}
         >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+            {value === index && <Box sx={{ p: 3, height: '100%'/*todo move to css*/}}>{children}</Box>}
         </div>
     );
 }
@@ -90,14 +93,14 @@ export const OfferDetailsModal = ({open, handleClose, offerId}: OfferDetailsModa
                 height: '80vh'
             }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                    <Tabs value={value} onChange={handleChange} aria-label="offer details">
                         <Tab label="Details" {...a11yProps(0)} />
                         <Tab label="Categories" {...a11yProps(1)} />
                         <Tab label="Salary" {...a11yProps(2)} />
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={value} index={0}>
-                    Details
+                    <OfferDetails offerId={offerId}></OfferDetails>
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
                     Categories

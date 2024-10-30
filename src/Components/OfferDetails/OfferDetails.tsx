@@ -1,28 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import Typography from "@mui/material/Typography";
-import {FetchOfferDetails, OfferDetailsDto} from "./FetchOfferDetails";
+import {FetchOfferDetails} from "./FetchOfferDetails";
 import {CircularProgress} from "@mui/material";
 import './OfferDetails.css';
+import {OfferDetailsResponse} from "./OfferDetailsResponse";
+import Button from "@mui/material/Button";
 
 interface OfferDetailsProps {
     offerId: string;
 }
 
 export const OfferDetails = ({offerId}: OfferDetailsProps) => {
-    const [offerDetails, setOfferDetails] = useState<OfferDetailsDto>();
-
-    // todo if its already fetched don't fetch for the second time
+    const [offerDetails, setOfferDetails] = useState<OfferDetailsResponse>();
 
     useEffect(() => {
-        console.log('in use effect');
-        console.log(offerDetails);
-        console.log('----');
         FetchOfferDetails(offerId).then(response => setOfferDetails(response));
     }, [offerId]);
 
     return <>
         {offerDetails ? <>
-            <Typography>Details of {offerId}</Typography>
+            <Typography variant='h6'>{offerDetails.title}</Typography>
+            <Button variant="outlined" href={offerDetails.url} target="_blank">JustJoinIt</Button>
+            <ul>
+                <li>{offerDetails.company.name}</li>
+                <li>{offerDetails.company.city}</li>
+                <li>{offerDetails.company.street}</li>
+            </ul>
         </> : <div className='offer-details-container' >
             <CircularProgress/>
         </div>}

@@ -1,15 +1,9 @@
 import axios from "axios";
 import {MockedHttp} from "../../Mocks/MockedHttpConnection";
 import {ApiRoutes} from "../../ApiRoutes";
-import {HttpResponseBody} from "../../Common/HttpInterfaces";
+import {OfferDetailsResponse} from "./OfferDetailsResponse";
 
-export interface OfferDetailsDto extends HttpResponseBody {
-    id: string,
-    title: string,
-    url: string,
-}
-
-export const FetchOfferDetails = async (offerId: string): Promise<OfferDetailsDto> => {
+export const FetchOfferDetails = async (offerId: string): Promise<OfferDetailsResponse> => {
     MockedHttp.offerDetails(offerId);
 
     return await axios(ApiRoutes.OFFER_DETAILS(offerId)).then(response => {

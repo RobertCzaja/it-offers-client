@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Typography from "@mui/material/Typography";
 import {FetchOfferDetails} from "./FetchOfferDetails";
-import {Chip, CircularProgress} from "@mui/material";
+import {Chip, CircularProgress, Grid2} from "@mui/material";
 import './OfferDetails.css';
 import {OfferCategoryResponse, OfferDetailsResponse, OfferSalaryResponse} from "./OfferDetailsResponse";
 import Button from "@mui/material/Button";
@@ -19,8 +19,15 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
 
     return <>
         {offerDetails ? <>
-            <Typography variant='h6'>{offerDetails.title}</Typography>
-            <Button variant="outlined" href={offerDetails.url} target="_blank">JustJoinIt</Button>
+            <Grid2 container spacing={2}>
+                <Grid2 size={10}>
+                    <Typography variant='h6'>{offerDetails.title}</Typography>
+                </Grid2>
+                <Grid2 size={2}>
+                    <Button variant="outlined" href={offerDetails.url} target="_blank">JustJoinIt</Button>
+                </Grid2>
+            </Grid2>
+
             <ul>
                 <li>Seniority: {offerDetails.seniority}</li>
                 <li>Time: {offerDetails.time}</li>
@@ -28,8 +35,8 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
                 <li>Remote interview: {offerDetails.remoteInterview ? 'yes' : 'no'}</li>
             </ul>
             <ul>
-                <li>Published at: {offerDetails.publishedAt.toString()}</li>
-                <li>Created at: {offerDetails.createdAt.toString()}</li>
+                <li>Published at: {new Date(offerDetails.publishedAt).toLocaleString('pl-PL')}</li>
+                <li>Created at: {new Date(offerDetails.createdAt).toLocaleString('pl-PL')}</li>
             </ul>
             <ul>
                 <li>{offerDetails.company.name}</li>

@@ -15,7 +15,7 @@ export interface OfferDetailsResponse extends HttpResponseBody {
     salaries: OfferSalaryResponse[],
 }
 
-interface OfferSalaryResponse {
+export interface OfferSalaryResponse {
     from: number,
     to: number,
     currency: string,
@@ -23,12 +23,12 @@ interface OfferSalaryResponse {
     isOriginal: boolean,
 }
 
-interface OfferCategoryResponse {
+export interface OfferCategoryResponse {
     id: string,
     name: string,
 }
 
-interface CompanyBasicResponse {
+export interface CompanyBasicResponse {
     id: string,
     name: string,
     city: string,

@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Box, Tab, Tabs} from "@mui/material";
 import {OfferDetails} from "./OfferDetails";
+import './OfferDetailsModal.css';
 
 interface OfferDetailsModalProps {
     open: boolean;
@@ -31,28 +32,27 @@ interface TabPanelProps {
     value: number;
 }
 
-/* todo name to change */
-function CustomTabPanel(props: TabPanelProps) {
+function OfferDetailsTabPanel(props: TabPanelProps) {
     const { children, value, index, ...other } = props;
 
     return (
         <div
             role="tabpanel"
             hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            style={{height: '100%'}} /*todo move to css*/
+            id={`offer-details-tabpanel-${index}`}
+            aria-labelledby={`offer-details-tab-${index}`}
+            className="offer-details-tab-panel"
             {...other}
         >
-            {value === index && <Box sx={{ p: 3, height: '100%'/*todo move to css*/}}>{children}</Box>}
+            {value === index && <Box className='offer-details-tab-panel-box'>{children}</Box>}
         </div>
     );
 }
 
 function a11yProps(index: number) {
     return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
+        id: `offer-details-${index}`,
+        'aria-controls': `offer-details-${index}`,
     };
 }
 
@@ -99,15 +99,15 @@ export const OfferDetailsModal = ({open, handleClose, offerId}: OfferDetailsModa
                         <Tab label="Salary" {...a11yProps(2)} />
                     </Tabs>
                 </Box>
-                <CustomTabPanel value={value} index={0}>
+                <OfferDetailsTabPanel value={value} index={0}>
                     <OfferDetails offerId={offerId}></OfferDetails>
-                </CustomTabPanel>
-                <CustomTabPanel value={value} index={1}>
+                </OfferDetailsTabPanel>
+                <OfferDetailsTabPanel value={value} index={1}>
                     Categories
-                </CustomTabPanel>
-                <CustomTabPanel value={value} index={2}>
+                </OfferDetailsTabPanel>
+                <OfferDetailsTabPanel value={value} index={2}>
                     Salary
-                </CustomTabPanel>
+                </OfferDetailsTabPanel>
 
             </DialogContent>
             <DialogActions>

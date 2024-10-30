@@ -1,0 +1,8 @@
+.offer-details-tab-panel {
+    height: 100%;
+}
+
+.offer-details-tab-panel .offer-details-tab-panel-box {
+    height: 100%;
+    padding: 1em;
+}

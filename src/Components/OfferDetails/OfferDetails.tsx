@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Typography from "@mui/material/Typography";
 import {FetchOfferDetails, OfferDetailsDto} from "./FetchOfferDetails";
-import {Box, CircularProgress, LinearProgress, Stack} from "@mui/material";
+import {CircularProgress} from "@mui/material";
+import './OfferDetails.css';
 
 interface OfferDetailsProps {
     offerId: string;
@@ -22,12 +23,7 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
     return <>
         {offerDetails ? <>
             <Typography>Details of {offerId}</Typography>
-        </> : <div style={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "center",
-            minHeight: '100%'/*todo move to css*/
-        }}>
+        </> : <div className='offer-details-container' >
             <CircularProgress/>
         </div>}
     </>

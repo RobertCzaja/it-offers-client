@@ -99,7 +99,7 @@ export const OfferDetailsModal = ({open, handleClose, offerId}: OfferDetailsModa
                         <Tab label="Salary" {...a11yProps(2)} />
                     </Tabs>
                 </Box>
-                <OfferDetailsTabPanel value={value} index={0}>
+                <OfferDetailsTabPanel  value={value} index={0}>
                     <OfferDetails offerId={offerId}></OfferDetails>
                 </OfferDetailsTabPanel>
                 <OfferDetailsTabPanel value={value} index={1}>

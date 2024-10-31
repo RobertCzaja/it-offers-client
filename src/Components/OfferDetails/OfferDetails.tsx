@@ -56,12 +56,13 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
                         <div>
                             <Typography>Categories/Required skills</Typography>
                             {offerDetails.categories.map((category: OfferCategoryResponse) => <Chip
+                                key={category.id}
                                 label={category.name}/>)}
                         </div>
 
                         <div>
                             <Typography>Salaries</Typography>
-                            {offerDetails.salaries.map((salary: OfferSalaryResponse) => <Typography>
+                            {offerDetails.salaries.map((salary: OfferSalaryResponse) => <Typography key={salary.currency}>
                                 {salary.from} - {salary.to} {salary.currency} ({salary.type})
                             </Typography>)}
                         </div>

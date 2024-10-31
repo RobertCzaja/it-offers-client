@@ -18,7 +18,6 @@ export class MockedHttp {
                 {id: "04961e58-ad3a-4e5a-8972-d5fc586dc10e", name: "AWS"},
                 {id: "542bc8b5-4988-44f4-9459-bcc7c83e3329", name: "Docker"},
                 {id: "61e8faf4-5b4a-43d8-b8d7-1380d522dda9", name: "Varnish"},
-                {id: "61e8faf4-5b4a-43d8-b8d7-1380d522dda9", name: "Varnish"},
                 {id: "6808712c-0c61-41b6-9299-9721496fc56a", name: "Zabbix"},
             ],
             createdAt: new Date("2024-10-13T06:31:54.1234Z"),

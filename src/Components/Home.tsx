@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import {FetchToken} from "./Authorization/FetchToken";
 
 export const Home = () => {
-    FetchToken({email: "a@a.com", password: "test"});
+    FetchToken({email: "a@a.com", password: "test"}).then(response => console.log(response));
     return (
         <>
             <Grid2 container spacing={2} sx={{ m: "1em" }}>

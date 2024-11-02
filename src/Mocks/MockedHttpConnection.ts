@@ -10,7 +10,7 @@ export class MockedHttp {
 
     static authorization(): void {
         const body: Token = {
-            token: "egJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEucGwiLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzMwNTYzODg4fQ.07PnI1nJQws913tKBvWfO4bxgdvaGzgU-vpgJf5CtlU"
+            value: "egJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEucGwiLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzMwNTYzODg4fQ.07PnI1nJQws913tKBvWfO4bxgdvaGzgU-vpgJf5CtlU"
         };
         MockedHttp.mocker.mock({
             ...ApiRoutes.AUTH,

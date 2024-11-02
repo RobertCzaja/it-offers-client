@@ -5,11 +5,12 @@ import {OfferListFilters} from "./OfferListFilters/OfferListFilters";
 import {Grid2} from "@mui/material";
 import Typography from '@mui/material/Typography';
 import {FetchToken} from "./Authorization/FetchToken";
+import {LoginForm} from "./Authorization/LoginForm";
 
 export const Home = () => {
-    FetchToken({email: "a@a.com", password: "test"}).then(response => console.log(response));
     return (
         <>
+            <LoginForm />
             <Grid2 container spacing={2} sx={{ m: "1em" }}>
                 <Grid2 size={12}>
                     <Typography variant="h4" gutterBottom>Offers</Typography>

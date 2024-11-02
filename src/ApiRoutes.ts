@@ -7,6 +7,8 @@ export interface RouteInterface {
 }
 
 export class ApiRoutes {
+    public static readonly AUTH: RouteInterface = {method: 'POST', url: UrlCreator('/auth')};
+
     static OFFER_DETAILS(offerId: string): RouteInterface {
         return {method: 'GET', url: UrlCreator(`/offers-details/${offerId}`)}
     }

@@ -4,8 +4,10 @@ import {MockedData} from "../Mocks/MockedData";
 import {OfferListFilters} from "./OfferListFilters/OfferListFilters";
 import {Grid2} from "@mui/material";
 import Typography from '@mui/material/Typography';
+import {FetchToken} from "./Authorization/FetchToken";
 
 export const Home = () => {
+    FetchToken({email: "a@a.com", password: "test"});
     return (
         <>
             <Grid2 container spacing={2} sx={{ m: "1em" }}>

@@ -1,11 +1,27 @@
 import HttpRequestMock from "http-request-mock";
 import {ApiRoutes} from "../ApiRoutes";
 import {OfferDetailsResponse} from "../Components/OfferDetails/OfferDetailsResponse";
+import {Token} from "../Components/Authorization/AuthorizationTypes";
 
 
 export class MockedHttp {
 
     private static readonly mocker = HttpRequestMock.setup();
+
+    static authorization(): void {
+        const body: Token = {
+            token: "egJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEucGwiLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzMwNTYzODg4fQ.07PnI1nJQws913tKBvWfO4bxgdvaGzgU-vpgJf5CtlU"
+        };
+        MockedHttp.mocker.mock({
+            ...ApiRoutes.AUTH,
+            ...{
+                delay: 1000,
+                status: 200,
+                headers: {'content-type': 'application/json', 'some-header': 'value',},
+                body: body
+            }
+        });
+    }
 
     static offerDetails(offerId: string): void {
         const body: OfferDetailsResponse = {

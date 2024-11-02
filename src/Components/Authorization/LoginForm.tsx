@@ -1,75 +1,57 @@
 import React, {useState} from 'react';
-import {FormControl, IconButton, Input, InputAdornment, InputLabel, OutlinedInput, TextField} from "@mui/material";
+import {
+    Box,
+    Grid2,
+    TextField
+} from "@mui/material";
 import Button from "@mui/material/Button";
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import {FetchToken} from "./FetchToken";
+import {Token} from "./AuthorizationTypes";
 
 export const LoginForm = () => {
 
-    const [email, setEmail] = useState<string>();
-    const [password, setPassword] = useState<string>();
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
-    const [showPassword, setShowPassword] = React.useState(false);
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
-    const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
-    const handleSubmit = () => {
-        console.log('fetch token');
+    const handleSubmit = (event: React.SyntheticEvent) => {
+        console.log(email, password); // todo to remove
+        FetchToken({email: email, password: password}).then((token: Token) => console.log(token.value));
+        // todo set it in global context
     }
 
-    // todo call FetchToken
     // todo add email validation; password some simple length validation
-    // todo put into container
-    // todo make small
+    // todo use form react package
 
     return <>
-        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-            <TextField
-                required id="email"
-                label="Email"
-                variant="outlined"
-                size="small"
-            />
+        <Box component="form" noValidate sx={{mt: 3}}>
+            <Grid2 container spacing={2}>
+                <Grid2>
+                   <TextField
+                       name="email"
+                       required
+                       value={email}
+                       onChange={e => setEmail(e.target.value)}
+                       fullWidth
+                       id="email"
+                       label="Email"
+                       autoFocus
+                       size="small"
+                   />
+                   <TextField
+                       name="password"
+                       required
+                       value={password}
+                       onChange={e => setPassword(e.target.value)}
+                       fullWidth
+                       id="password"
+                       label="Password"
+                       autoFocus
+                       size="small"
+                   />
 
-            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-            <OutlinedInput
-                required
-                id="outlined-adornment-password"
-                size="small"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="Password"
-                endAdornment={
-                    <InputAdornment position="end">
-                        <IconButton
-                            aria-label={
-                                showPassword ? 'hide the password' : 'display the password'
-                            }
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            onMouseUp={handleMouseUpPassword}
-                            edge="end"
-                        >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                    </InputAdornment>
-                }
-                label="Password"
-            />
-
-            <Button
-                variant="outlined"
-                onClick={handleSubmit}
-            >
-                Login
-            </Button>
-        </FormControl>
+                    <Button variant="outlined" onClick={handleSubmit}>Login</Button>
+                </Grid2>
+            </Grid2>
+        </Box>
     </>
 }

@@ -1,12 +1,32 @@
 import {RouteInterface} from "../ApiRoutes";
+import {getToken} from "../Components/Authorization/TokenRepository";
 
-export const AxiosFactory = (route: RouteInterface, requestBody: object) => {
+type HttpHeaders = {
+    'content-type': string;
+    'Authorization' ?: string;
+}
+
+export const AxiosFactory = (
+    route: RouteInterface,
+    requestBody: object = {},
+    setAuthToken: boolean = true
+) => {
+    const headers: HttpHeaders = {
+        'content-type': 'application/json',
+    };
+
+    if (setAuthToken) {
+        const token: string|null = getToken();
+        if (!token) {
+            throw new Error('Auth token not provided');
+        }
+        headers['Authorization'] = 'Bearer '+token;
+    }
+
     return {
         ...route,
         ...{
-            headers: {
-                'content-type': 'application/json',
-            },
+            headers: headers,
             data: requestBody
         },
     }

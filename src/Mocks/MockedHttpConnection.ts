@@ -2,13 +2,16 @@ import HttpRequestMock from "http-request-mock";
 import {ApiRoutes} from "../ApiRoutes";
 import {OfferDetailsResponse} from "../Components/OfferDetails/OfferDetailsResponse";
 import {Token} from "../Components/Authorization/AuthorizationTypes";
-
+import env from "react-dotenv";
+import {Environment} from "../Helpers/Environment";
 
 export class MockedHttp {
 
     private static readonly mocker = HttpRequestMock.setup();
 
     static authorization(): void {
+        if (env.APP !== Environment.DEV_NO_HTTP) return;
+
         const body: Token = {
             value: "egJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEucGwiLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzMwNTYzODg4fQ.07PnI1nJQws913tKBvWfO4bxgdvaGzgU-vpgJf5CtlU"
         };
@@ -24,6 +27,8 @@ export class MockedHttp {
     }
 
     static offerDetails(offerId: string): void {
+        if (env.APP !== Environment.DEV_NO_HTTP) return;
+
         const body: OfferDetailsResponse = {
             id: offerId,
             title: "One Identity Consultant z j. angielskim",

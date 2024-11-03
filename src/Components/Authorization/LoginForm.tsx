@@ -7,6 +7,7 @@ import {FetchToken} from "./FetchToken";
 import {Token} from "./AuthorizationTypes";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {LoadingButton} from "@mui/lab";
+import {saveToken} from "./TokenRepository";
 
 type LoginFormValues = {
     email: string
@@ -24,9 +25,9 @@ export const LoginForm = () => {
     const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
         setLoading(true);
         FetchToken(data).then((token: Token) => {
+            saveToken(token.value);
             setLoading(false);
         });
-        // todo set it in global context
     }
 
     return <>

@@ -5,10 +5,11 @@ import {OfferListFilters} from "./OfferListFilters/OfferListFilters";
 import {Grid2} from "@mui/material";
 import Typography from '@mui/material/Typography';
 import {LoginForm} from "./Authorization/LoginForm";
+import {AuthorizationContextProvider} from "./Authorization/AuthorizationContext";
 
 export const Home = () => {
     return (
-        <>
+        <AuthorizationContextProvider>
             <LoginForm />
             <Grid2 container spacing={2} sx={{ m: "1em" }}>
                 <Grid2 size={12}>
@@ -21,6 +22,6 @@ export const Home = () => {
                     <OfferList offers={MockedData.offers()}/>
                 </Grid2>
             </Grid2>
-        </>
+        </AuthorizationContextProvider>
     )
 }

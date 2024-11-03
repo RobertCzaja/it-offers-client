@@ -28,7 +28,6 @@ export const LoginForm = () => {
         });
         // todo set it in global context
     }
-    console.log('control');
 
     return <>
         <form onSubmit={handleSubmit(onSubmit)}>

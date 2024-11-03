@@ -4,7 +4,6 @@ import {MockedData} from "../Mocks/MockedData";
 import {OfferListFilters} from "./OfferListFilters/OfferListFilters";
 import {Grid2} from "@mui/material";
 import Typography from '@mui/material/Typography';
-import {FetchToken} from "./Authorization/FetchToken";
 import {LoginForm} from "./Authorization/LoginForm";
 
 export const Home = () => {

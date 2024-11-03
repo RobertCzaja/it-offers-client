@@ -19,6 +19,9 @@ type Props = { children: React.ReactNode };
 
 const UserContext = createContext<UserContextType>({} as UserContextType);
 
+/**
+ * @deprecated todo: to remove
+ */
 export const UserProvider = ({children} : Props) => {
     const navigate = useNavigate();
     const [token, setToken] = useState<string | null>(null);

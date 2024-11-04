@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {
-    Grid2,
+    Grid2, Snackbar,
     TextField
 } from "@mui/material";
 import {FetchToken} from "./FetchToken";
@@ -15,6 +15,7 @@ type LoginFormValues = {
 }
 
 export const LoginForm = () => {
+    const [errorSnackbar, setErrorSnackbar] = useState(false);
     const [loading, setLoading] = useState<boolean>(false);
     const {
         register,
@@ -22,11 +23,18 @@ export const LoginForm = () => {
         formState:{errors},
     } = useForm<LoginFormValues>({defaultValues: {email: "", password: "",}});
 
+    const handleCloseErrorSnackbar = () => {
+        setErrorSnackbar(false);
+    };
+
     const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
         setLoading(true);
         FetchToken(data).then((token: Token) => {
             saveToken(token.value);
             setLoading(false);
+        }).catch(() => {
+            setLoading(false);
+            setErrorSnackbar(true);
         });
     }
 
@@ -57,5 +65,11 @@ export const LoginForm = () => {
                 </LoadingButton>
             </Grid2>
         </form>
+        <Snackbar
+            open={errorSnackbar}
+            autoHideDuration={6000}
+            onClose={handleCloseErrorSnackbar}
+            message="Auth error"
+        />
     </>
 }

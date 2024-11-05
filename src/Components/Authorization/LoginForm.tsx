@@ -55,34 +55,39 @@ export const LoginForm = () => {
         });
     }
 
-    console.log(errors); // todo to remove
-
     return <>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid2 container spacing={1} sx={{mt: 1, ml: 2}}>
-                {/*todo better display error in both fields*/}
                 {/*todo on api add more precise cors origin*/}
-                {/*todo keep disable "login" button on not provided all data: email/password*/}
                 <TextField
-                    /*error*/
-                    /*helperText="Invalid email"*/
-                    required
-                    type="email"
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
                     size="small"
                     label="Email"
-                    {...register("email")}
+                    {...register("email", {
+                        required: true,
+                        pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: 'Invalid email',
+                        },
+                    })}
                 />
                 <TextField
-                    required
+                    error={!!errors.password}
+                    helperText={errors.password?.message}
                     type="password"
                     size="small"
                     label="Password"
-                    slotProps={{ htmlInput: {minLength: 5, maxLength: 30} }}
-                    {...register("password")}
+                    {...register("password", {
+                        required: true,
+                        minLength: { value: 5, message: "Min 5 chars" },
+                        maxLength: { value: 12, message: "Max 12 chars" },
+                    })}
                 />
                 <LoadingButton
                     loading={loading}
                     type="submit"
+                    style={{maxHeight: 40}}
                     variant="outlined"
                 >
                     Login

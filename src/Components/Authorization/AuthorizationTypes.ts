@@ -1,5 +1,5 @@
 export type Token = {
-    value: string;
+    token: string;
 }
 
 export type Credentials = {

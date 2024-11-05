@@ -1,5 +1,5 @@
 import HttpRequestMock from "http-request-mock";
-import {ApiRoutes} from "../ApiRoutes";
+import {ApiRoutes} from "../Helpers/ApiRoutes";
 import {OfferDetailsResponse} from "../Components/OfferDetails/OfferDetailsResponse";
 import {Token} from "../Components/Authorization/AuthorizationTypes";
 import env from "react-dotenv";
@@ -13,7 +13,7 @@ export class MockedHttp {
         if (env.APP !== Environment.DEV_NO_HTTP) return;
 
         const body: Token = {
-            value: "egJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEucGwiLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzMwNTYzODg4fQ.07PnI1nJQws913tKBvWfO4bxgdvaGzgU-vpgJf5CtlU"
+            token: "egJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhQGEucGwiLCJmaXJzdE5hbWUiOiIiLCJsYXN0TmFtZSI6IiIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiZXhwIjoxNzMwNTYzODg4fQ.07PnI1nJQws913tKBvWfO4bxgdvaGzgU-vpgJf5CtlU"
         };
         MockedHttp.mocker.mock({
             ...ApiRoutes.AUTH,

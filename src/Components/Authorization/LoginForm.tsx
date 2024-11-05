@@ -35,7 +35,8 @@ export const LoginForm = () => {
     const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
         setLoading(true);
         FetchToken(data).then((token: Token) => {
-            saveToken(token.value);
+            console.log(token.token);
+            saveToken(token.token);
             setLoading(false);
             setAuthResultMessage('Successfully logged');
             setShowSnackbar(true);

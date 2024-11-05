@@ -1,6 +1,6 @@
 import axios from "axios";
 import {MockedHttp} from "../../Mocks/MockedHttpConnection";
-import {ApiRoutes} from "../../ApiRoutes";
+import {ApiRoutes} from "../../Helpers/ApiRoutes";
 import {OfferDetailsResponse} from "./OfferDetailsResponse";
 import {AxiosFactory} from "../../Helpers/AxiosFactory";
 

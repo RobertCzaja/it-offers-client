@@ -1,4 +1,4 @@
-import {RouteInterface} from "../ApiRoutes";
+import {RouteInterface} from "./ApiRoutes";
 import {getToken} from "../Components/Authorization/TokenRepository";
 import * as https from "https";
 
@@ -12,14 +12,6 @@ export const AxiosFactory = (
     requestBody: object = {},
     setAuthToken: boolean = true
 ) => {
-    /* Cannot be used because a problemn
-    https.globalAgent.options.rejectUnauthorized = false;
-     */
-    //console.log(345345);
-    //console.log(https);
-    //const agent = new https.Agent({rejectUnauthorized: false});
-    console.log('move forward');
-
     const headers: HttpHeaders = {
         'content-type': 'application/json',
     };
@@ -35,7 +27,6 @@ export const AxiosFactory = (
     return {
         ...route,
         ...{
-            /*httpsAgent: agent,*/
             headers: headers,
             data: requestBody
         },

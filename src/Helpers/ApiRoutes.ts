@@ -1,4 +1,4 @@
-import {UrlCreator} from "./Helpers/UrlCreator";
+import {UrlCreator} from "./UrlCreator";
 import {HttpVerb} from "http-request-mock/src/types";
 
 export interface RouteInterface {
@@ -11,5 +11,9 @@ export class ApiRoutes {
 
     static OFFER_DETAILS(offerId: string): RouteInterface {
         return {method: 'GET', url: UrlCreator(`/offers-details/${offerId}`)}
+    }
+
+    static REPORT_SALARIES(): RouteInterface {
+        return {method: 'GET', url: UrlCreator('/report/salaries?technologies=php')};
     }
 }

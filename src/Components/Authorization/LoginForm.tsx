@@ -18,7 +18,7 @@ type LoginFormValues = {
 }
 
 export const LoginForm = () => {
-    const [snackbar, setAuthSnackbar] = useState(false);
+    const [showSnackbar, setShowSnackbar] = useState(false);
     const [authResultMessage, setAuthResultMessage] = useState<string>('');
     const [authMessageSeverity, setAuthMessageSeverity] = useState<AlertColor>('success');
     const [loading, setLoading] = useState<boolean>(false);
@@ -29,7 +29,7 @@ export const LoginForm = () => {
     } = useForm<LoginFormValues>({defaultValues: {email: "", password: "",}});
 
     const handleCloseErrorSnackbar = () => {
-        setAuthSnackbar(false);
+        setShowSnackbar(false);
     };
 
     const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
@@ -38,7 +38,7 @@ export const LoginForm = () => {
             saveToken(token.value);
             setLoading(false);
             setAuthResultMessage('Successfully logged');
-            setAuthSnackbar(true);
+            setShowSnackbar(true);
             setAuthMessageSeverity('success');
         }).catch((errorResponse: AxiosError) => {
             switch (errorResponse.status) {
@@ -50,17 +50,22 @@ export const LoginForm = () => {
                     break;
             }
             setLoading(false);
-            setAuthSnackbar(true);
+            setShowSnackbar(true);
             setAuthMessageSeverity('error');
         });
     }
+
+    console.log(errors); // todo to remove
 
     return <>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid2 container spacing={1} sx={{mt: 1, ml: 2}}>
                 {/*todo better display error in both fields*/}
                 {/*todo on api add more precise cors origin*/}
+                {/*todo keep disable "login" button on not provided all data: email/password*/}
                 <TextField
+                    /*error*/
+                    /*helperText="Invalid email"*/
                     required
                     type="email"
                     size="small"
@@ -84,7 +89,7 @@ export const LoginForm = () => {
                 </LoadingButton>
             </Grid2>
         </form>
-        <Snackbar open={snackbar} autoHideDuration={2000} onClose={handleCloseErrorSnackbar}>
+        <Snackbar open={showSnackbar} autoHideDuration={2000} onClose={handleCloseErrorSnackbar}>
             <Alert severity={authMessageSeverity}>{authResultMessage}</Alert>
         </Snackbar>
     </>

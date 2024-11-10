@@ -5,12 +5,12 @@ import {OfferListFilters} from "./OfferListFilters/OfferListFilters";
 import {Grid2} from "@mui/material";
 import Typography from '@mui/material/Typography';
 import {LoginForm} from "./Authorization/LoginForm";
-import {FetchReportSalaries} from "./Report/FetchReportSalaries";
 import Button from "@mui/material/Button";
+import {FetchOffersList} from "./OfferList/FetchOffersList";
 
 export const Home = () => {
     const fetchSalaries = () => {
-        FetchReportSalaries().then(data => console.log(data));
+        FetchOffersList().then(data => console.log(data))
     }
 
     return (

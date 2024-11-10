@@ -13,7 +13,7 @@ export class ApiRoutes {
         return {method: 'GET', url: UrlCreator(`/offers-details/${offerId}`)}
     }
 
-    static REPORT_SALARIES(): RouteInterface {
-        return {method: 'GET', url: UrlCreator('/report/salaries?technologies=php')};
+    static OFFERS(): RouteInterface {
+        return {method: 'GET', url: UrlCreator(`/offers`)}
     }
 }

@@ -5,12 +5,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {Button, Grid2, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import './OfferListFilters.css';
-import {PublishedAtScope} from "./OfferListFiltersModel";
+import {OffersListFilters, PublishedAtScope} from "./OfferListFiltersModel";
 import {MultiSelect} from "../../Common/MultiSelect/MultiSelect";
 import {JobTechnologies} from "./JobTechnologies";
 import {DateScope, DateScopeType} from "./DateScope";
 
-export const OfferListFilters = () => {
+interface OfferListFilters {
+    fetchOffers: ({from, to, technologies}: OffersListFilters) => void;
+}
+
+export const OfferListFilters = ({fetchOffers}: OfferListFilters) => {
     const [publishedAtFrom, setPublishedAtFrom] = useState<Dayjs|null>(null);
     const [publishedAtTo, setPublishedAtTo] = useState<Dayjs|null>(null);
     const [publishedAtScope, setPublishedAtScope] = useState<PublishedAtScope|null>(null);
@@ -23,9 +27,12 @@ export const OfferListFilters = () => {
         setPublishedAtScope(scope);
     };
 
-    /* todo needs to be implemented */
-    const fetch = () => {
-        console.log(publishedAtFrom, publishedAtTo, selectedTechnologies);
+    const handleSearch = (): void => {
+        fetchOffers({
+            from: publishedAtFrom,
+            to: publishedAtTo,
+            technologies: selectedTechnologies
+        });
     }
 
     return (
@@ -69,7 +76,7 @@ export const OfferListFilters = () => {
                         selected={selectedTechnologies}
                         setSelected={setSelectedTechnologies}
                     />
-                    <Button variant="outlined" sx={{ width: 231 }} onClick={fetch}>
+                    <Button variant="outlined" sx={{ width: 231 }} onClick={handleSearch}>
                         Search
                     </Button>
                 </Grid2>

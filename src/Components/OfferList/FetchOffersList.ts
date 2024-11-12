@@ -1,10 +1,10 @@
 import axios from "axios";
 import {AxiosFactory} from "../../Helpers/AxiosFactory";
 import {ApiRoutes} from "../../Helpers/ApiRoutes";
-import {OfferListItemResponse} from "./OfferListModel";
+import {OfferListResponse} from "./OfferListModel";
 import {OffersListFilters} from "../OfferListFilters/OfferListFiltersModel";
 
-export const FetchOffersList = async (filters: OffersListFilters): Promise<OfferListItemResponse> => {
+export const FetchOffersList = async (filters: OffersListFilters): Promise<OfferListResponse> => {
     return await axios(
         {
             ...AxiosFactory(ApiRoutes.OFFERS({

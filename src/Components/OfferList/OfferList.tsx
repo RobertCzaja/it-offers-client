@@ -8,9 +8,10 @@ import {OfferDetailsModal} from "../OfferDetails/OfferDetailsModal";
 
 interface OfferListProps {
     offers: OfferListModel[];
+    loading: boolean;
 }
 
-export const OfferList = ({offers}: OfferListProps) => {
+export const OfferList = ({offers, loading}: OfferListProps) => {
     const dateFormatter = new Intl.DateTimeFormat("pl-PL");
     const [open, setOpen] = useState<boolean>(false);
     const [offerId, setOfferId] = useState<string>();
@@ -21,7 +22,7 @@ export const OfferList = ({offers}: OfferListProps) => {
     const handleClose = () => setOpen(false);
 
     const columns: GridColDef[] = [
-        { field: 'technology', headerName: '', width: 50, align: "center"},
+        { field: 'technology', headerName: '', width: 75, align: "center"},
         { field: 'seniority', headerName: 'Level', width: 75, align: "right" },
         { field: 'title', headerName: 'Job', width: 250 },
         { field: 'salaryFrom', headerName: 'From', type: 'number', width: 75 },
@@ -60,7 +61,17 @@ export const OfferList = ({offers}: OfferListProps) => {
 
     return (
         <div className='offer-list'>
-            <DataGrid rows={offers} columns={columns} />
+            <DataGrid
+                loading={loading}
+                slotProps={{
+                    loadingOverlay: {
+                        variant: 'skeleton',
+                        noRowsVariant: 'skeleton',
+                    },
+                }}
+                rows={offers}
+                columns={columns}
+            />
             {offerId ? <OfferDetailsModal open={open} handleClose={handleClose} offerId={offerId}/> : null}
         </div>
     );

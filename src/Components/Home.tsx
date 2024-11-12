@@ -1,16 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {OfferList} from "./OfferList/OfferList";
-import {MockedData} from "../Mocks/MockedData";
 import {OfferListFilters} from "./OfferListFilters/OfferListFilters";
 import {Grid2} from "@mui/material";
 import Typography from '@mui/material/Typography';
 import {LoginForm} from "./Authorization/LoginForm";
 import {FetchOffersList} from "./OfferList/FetchOffersList";
 import {OffersListFilters} from "./OfferListFilters/OfferListFiltersModel";
+import {
+    OfferListModel,
+    OfferListResponse,
+} from "./OfferList/OfferListModel";
+import {OfferListMapper} from "./OfferList/OfferListMapper";
 
 export const Home = () => {
+    const [offers, setOffers] = useState<OfferListModel[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
+
     const fetchOffers = (filters: OffersListFilters): void => {
-        FetchOffersList(filters).then(data => console.log(data))/*todo get real data here*/
+        setLoading(true);
+        FetchOffersList(filters).then((offersList: OfferListResponse) => {
+            setOffers(OfferListMapper(offersList));
+            setLoading(false);
+        })
     }
 
     return (
@@ -24,7 +35,7 @@ export const Home = () => {
                     <OfferListFilters fetchOffers={fetchOffers}/>
                 </Grid2>
                 <Grid2 size={12}>
-                    <OfferList offers={MockedData.offers()}/>
+                    <OfferList loading={loading} offers={offers}/>
                 </Grid2>
             </Grid2>
         </>

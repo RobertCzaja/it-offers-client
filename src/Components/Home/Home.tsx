@@ -27,7 +27,7 @@ export const Home = () => {
 
     return (
         <>
-            <Typography variant="h4" gutterBottom>Home</Typography>
+            Home
             {/*<LoginForm />*/}
             {/*<Grid2 container spacing={2} sx={{ m: "1em" }}>
                 <Grid2 size={12}>

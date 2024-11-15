@@ -1,8 +1,8 @@
 import {Credentials, Token} from "./AuthorizationTypes";
 import {MockedHttp} from "../../Mocks/MockedHttpConnection";
 import axios from "axios";
-import {ApiRoutes} from "../../Helpers/ApiRoutes";
-import {AxiosFactory} from "../../Helpers/AxiosFactory";
+import {ApiRoutes} from "../../Common/ApiRoutes";
+import {AxiosFactory} from "../../Common/AxiosFactory";
 
 export const FetchToken = async (credentials: Credentials): Promise<Token> => {
     MockedHttp.authorization();

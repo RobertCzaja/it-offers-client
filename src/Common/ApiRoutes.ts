@@ -1,5 +1,5 @@
-import {UrlCreator} from "./UrlCreator";
 import {HttpVerb} from "http-request-mock/src/types";
+import {UrlCreator} from "./UrlCreator";
 
 export interface RouteInterface {
     method: HttpVerb;

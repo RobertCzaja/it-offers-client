@@ -1,6 +1,6 @@
 import axios from "axios";
-import {AxiosFactory} from "../../Helpers/AxiosFactory";
-import {ApiRoutes} from "../../Helpers/ApiRoutes";
+import {AxiosFactory} from "../../Common/AxiosFactory";
+import {ApiRoutes} from "../../Common/ApiRoutes";
 import {OfferListResponse} from "./OfferListModel";
 import {OffersListFilters} from "../OfferListFilters/OfferListFiltersModel";
 

@@ -1,8 +1,8 @@
 import axios from "axios";
 import {MockedHttp} from "../../Mocks/MockedHttpConnection";
-import {ApiRoutes} from "../../Helpers/ApiRoutes";
+import {ApiRoutes} from "../../Common/ApiRoutes";
 import {OfferDetailsResponse} from "./OfferDetailsResponse";
-import {AxiosFactory} from "../../Helpers/AxiosFactory";
+import {AxiosFactory} from "../../Common/AxiosFactory";
 
 export const FetchOfferDetails = async (offerId: string): Promise<OfferDetailsResponse> => {
     MockedHttp.offerDetails(offerId);

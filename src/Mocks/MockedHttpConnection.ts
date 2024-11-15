@@ -1,9 +1,9 @@
 import HttpRequestMock from "http-request-mock";
-import {ApiRoutes} from "../Helpers/ApiRoutes";
+import {ApiRoutes} from "../Common/ApiRoutes";
 import {OfferDetailsResponse} from "../Components/OfferDetails/OfferDetailsResponse";
 import {Token} from "../Components/Authorization/AuthorizationTypes";
 import env from "react-dotenv";
-import {Environment} from "../Helpers/Environment";
+import {Environment} from "../Common/Environment";
 
 export class MockedHttp {
 

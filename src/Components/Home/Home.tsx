@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
-import {OfferList} from "./OfferList/OfferList";
-import {OfferListFilters} from "./OfferListFilters/OfferListFilters";
+import {OfferList} from "../OfferList/OfferList";
+import {OfferListFilters} from "../OfferListFilters/OfferListFilters";
 import {Grid2} from "@mui/material";
 import Typography from '@mui/material/Typography';
-import {LoginForm} from "./Authorization/LoginForm";
-import {FetchOffersList} from "./OfferList/FetchOffersList";
-import {OffersListFilters} from "./OfferListFilters/OfferListFiltersModel";
+import {LoginForm} from "../Authorization/LoginForm";
+import {FetchOffersList} from "../OfferList/FetchOffersList";
+import {OffersListFilters} from "../OfferListFilters/OfferListFiltersModel";
 import {
     OfferListModel,
     OfferListResponse,
-} from "./OfferList/OfferListModel";
-import {OfferListMapper} from "./OfferList/OfferListMapper";
+} from "../OfferList/OfferListModel";
+import {OfferListMapper} from "../OfferList/OfferListMapper";
 import Button from "@mui/material/Button";
 
 export const Home = () => {
@@ -27,11 +27,6 @@ export const Home = () => {
 
     return (
         <>
-            <Grid2 container spacing={2}>
-                <Button>Offers</Button>
-                <Button>Login</Button>
-            </Grid2>
-
             <Typography variant="h4" gutterBottom>Home</Typography>
             {/*<LoginForm />*/}
             {/*<Grid2 container spacing={2} sx={{ m: "1em" }}>

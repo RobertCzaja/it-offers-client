@@ -59,7 +59,6 @@ export const LoginForm = () => {
     return <>
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid2 container spacing={1} sx={{mt: 1, ml: 2}}>
-                {/*todo on api add more precise cors origin*/}
                 <TextField
                     error={!!errors.email}
                     helperText={errors.email?.message}

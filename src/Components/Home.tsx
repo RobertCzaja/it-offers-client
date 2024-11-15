@@ -11,6 +11,7 @@ import {
     OfferListResponse,
 } from "./OfferList/OfferListModel";
 import {OfferListMapper} from "./OfferList/OfferListMapper";
+import Button from "@mui/material/Button";
 
 export const Home = () => {
     const [offers, setOffers] = useState<OfferListModel[]>([]);
@@ -26,8 +27,14 @@ export const Home = () => {
 
     return (
         <>
-            <LoginForm />
-            <Grid2 container spacing={2} sx={{ m: "1em" }}>
+            <Grid2 container spacing={2}>
+                <Button>Offers</Button>
+                <Button>Login</Button>
+            </Grid2>
+
+            <Typography variant="h4" gutterBottom>Home</Typography>
+            {/*<LoginForm />*/}
+            {/*<Grid2 container spacing={2} sx={{ m: "1em" }}>
                 <Grid2 size={12}>
                     <Typography variant="h4" gutterBottom>Offers</Typography>
                 </Grid2>
@@ -37,7 +44,7 @@ export const Home = () => {
                 <Grid2 size={12}>
                     <OfferList loading={loading} offers={offers}/>
                 </Grid2>
-            </Grid2>
+            </Grid2>*/}
         </>
     )
 }

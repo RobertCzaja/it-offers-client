@@ -8,13 +8,13 @@ import {FetchToken} from "./FetchToken";
 import {Token} from "./AuthorizationTypes";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {LoadingButton} from "@mui/lab";
-import {saveToken} from "./TokenRepository";
 import {AxiosError} from "axios";
 import {AlertColor} from "@mui/material/Alert/Alert";
 import Typography from "@mui/material/Typography";
 import './LoginForm.css';
 import {useNavigate} from "react-router-dom";
 import {InternalRoutes} from "../Navigation/InternalRoutes";
+import {useAuth} from "./AuthContext";
 
 type LoginFormValues = {
     email: string
@@ -22,6 +22,7 @@ type LoginFormValues = {
 }
 
 export const LoginForm = () => {
+    const auth = useAuth();
     const navigate = useNavigate();
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
     const [authResultMessage, setAuthResultMessage] = useState<string>('');
@@ -40,7 +41,7 @@ export const LoginForm = () => {
     const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
         setLoading(true);
         FetchToken(data).then((token: Token) => {
-            saveToken(token.token);
+            auth.login({authToken: token.token, email: data.email})
             setLoading(false);
             setAuthResultMessage('Successfully logged');
             setShowSnackbar(true);

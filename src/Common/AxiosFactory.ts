@@ -1,5 +1,5 @@
 import {RouteInterface} from "./ApiRoutes";
-import {getToken} from "../Components/Authorization/TokenRepository";
+import {getToken} from "../Components/Authorization/AuthorizationRepository";
 import * as https from "https";
 
 type HttpHeaders = {

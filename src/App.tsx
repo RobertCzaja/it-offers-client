@@ -10,10 +10,11 @@ import {LoginPage} from "./Components/Authorization/LoginPage";
 import {Offers} from "./Components/Offers/Offers";
 import {Layout} from "./Components/Layout/Layout";
 import {NotFound} from "./Components/NotFound/NotFound";
+import AuthProvider from "./Components/Authorization/AuthContext";
 
 function App() {
     return (
-        <>
+        <AuthProvider>
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Home/>} />
@@ -22,7 +23,7 @@ function App() {
                     <Route path="/*" element={<NotFound/>} />
                 </Route>
             </Routes>
-        </>
+        </AuthProvider>
     );
 }
 

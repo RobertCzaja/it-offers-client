@@ -2,11 +2,11 @@ import {Grid2} from "@mui/material";
 import React, {useState} from "react";
 import {OfferListFilters} from "../OfferListFilters/OfferListFilters";
 import Typography from "@mui/material/Typography";
-import {OfferList} from "../OfferList/OfferList";
-import {OfferListModel, OfferListResponse} from "../OfferList/OfferListModel";
+import {OfferList} from "./OfferList";
+import {OfferListModel, OfferListResponse} from "./OfferListModel";
 import {OffersListFilters} from "../OfferListFilters/OfferListFiltersModel";
-import {FetchOffersList} from "../OfferList/FetchOffersList";
-import {OfferListMapper} from "../OfferList/OfferListMapper";
+import {FetchOffersList} from "./FetchOffersList";
+import {OfferListMapper} from "./OfferListMapper";
 
 export const OffersPage = () => {
     const [offers, setOffers] = useState<OfferListModel[]>([]);

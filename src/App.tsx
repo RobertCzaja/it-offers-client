@@ -6,9 +6,9 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {Route, Routes} from "react-router-dom";
 import {LoginPage} from "./Components/Authorization/LoginPage";
-import {OffersPage} from "./Components/Offers/OffersPage";
+import {OffersPage} from "./Components/OfferList/OffersPage";
 import {Layout} from "./Components/Layout/Layout";
-import {NotFound} from "./Components/NotFound/NotFound";
+import {NotFound} from "./Components/Layout/NotFound";
 import AuthProvider from "./Components/Authorization/AuthContext";
 import {InternalRoutes} from "./Components/Navigation/InternalRoutes";
 

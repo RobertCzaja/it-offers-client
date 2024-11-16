@@ -11,7 +11,6 @@ export const Navigation = () => {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <Button color="inherit" href={InternalRoutes.HOME}>Home</Button>
                     <Button color="inherit" href={InternalRoutes.OFFERS}>Offers</Button>
                     <Button color="inherit" onClick={() => {auth.logout()}}>Logout</Button>
                 </Toolbar>

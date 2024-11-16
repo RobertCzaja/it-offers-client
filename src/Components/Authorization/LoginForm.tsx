@@ -14,6 +14,7 @@ import {AlertColor} from "@mui/material/Alert/Alert";
 import Typography from "@mui/material/Typography";
 import './LoginForm.css';
 import {useNavigate} from "react-router-dom";
+import {InternalRoutes} from "../Navigation/InternalRoutes";
 
 type LoginFormValues = {
     email: string
@@ -36,7 +37,7 @@ export const LoginForm = () => {
         setShowSnackbar(false);
     };
 
-    const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues, e) => {
+    const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
         setLoading(true);
         FetchToken(data).then((token: Token) => {
             saveToken(token.token);
@@ -44,8 +45,7 @@ export const LoginForm = () => {
             setAuthResultMessage('Successfully logged');
             setShowSnackbar(true);
             setAuthMessageSeverity('success');
-            e?.target.reset();
-            navigate("/offers");
+            navigate(InternalRoutes.OFFERS);
         }).catch((errorResponse: AxiosError) => {
             switch (errorResponse.status) {
                 case 401:

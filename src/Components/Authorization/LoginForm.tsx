@@ -13,6 +13,7 @@ import {AxiosError} from "axios";
 import {AlertColor} from "@mui/material/Alert/Alert";
 import Typography from "@mui/material/Typography";
 import './LoginForm.css';
+import {useNavigate} from "react-router-dom";
 
 type LoginFormValues = {
     email: string
@@ -20,7 +21,8 @@ type LoginFormValues = {
 }
 
 export const LoginForm = () => {
-    const [showSnackbar, setShowSnackbar] = useState(false);
+    const navigate = useNavigate();
+    const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
     const [authResultMessage, setAuthResultMessage] = useState<string>('');
     const [authMessageSeverity, setAuthMessageSeverity] = useState<AlertColor>('success');
     const [loading, setLoading] = useState<boolean>(false);
@@ -34,17 +36,16 @@ export const LoginForm = () => {
         setShowSnackbar(false);
     };
 
-    const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues) => {
+    const onSubmit: SubmitHandler<LoginFormValues> = (data: LoginFormValues, e) => {
         setLoading(true);
         FetchToken(data).then((token: Token) => {
-            console.log(token.token);
             saveToken(token.token);
             setLoading(false);
             setAuthResultMessage('Successfully logged');
             setShowSnackbar(true);
             setAuthMessageSeverity('success');
-            // todo clear email and password state
-            // todo redirect to offers page
+            e?.target.reset();
+            navigate("/offers");
         }).catch((errorResponse: AxiosError) => {
             switch (errorResponse.status) {
                 case 401:
@@ -60,64 +61,61 @@ export const LoginForm = () => {
         });
     }
 
-    return <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        width={250}
-    >
-        <Card className="login-card">
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid2 container spacing={1}>
-                <Grid2 size={12}>
-                    <Typography align="center" variant="h6" className="login-title">Sign in</Typography>
-                </Grid2>
-                <Grid2 size={12}>
-                    <TextField
-                        error={!!errors.email}
-                        helperText={errors.email?.message}
-                        size="small"
-                        label="Email"
-                        className="input-field"
-                        {...register("email", {
-                            required: true,
-                            pattern: {
-                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                message: 'Invalid email',
-                            },
-                        })}
-                    />
-                </Grid2>
-                <Grid2 size={12}>
-                    <TextField
-                        error={!!errors.password}
-                        helperText={errors.password?.message}
-                        type="password"
-                        size="small"
-                        label="Password"
-                        className="input-field"
-                        {...register("password", {
-                            required: true,
-                            minLength: { value: 5, message: "Min 5 chars" },
-                            maxLength: { value: 12, message: "Max 12 chars" },
-                        })}
-                    />
-                </Grid2>
-                <Grid2 size={12}>
-                    <LoadingButton
-                        loading={loading}
-                        type="submit"
-                        className="login-btn"
-                        variant="outlined"
-                    >
-                        Login
-                    </LoadingButton>
-                </Grid2>
-            </Grid2>
-        </form>
-        <Snackbar open={showSnackbar} autoHideDuration={2000} onClose={handleCloseErrorSnackbar}>
-            <Alert severity={authMessageSeverity}>{authResultMessage}</Alert>
-        </Snackbar>
-        </Card>
-    </Box>
+    return <>
+        <Box display="flex" justifyContent="center" alignItems="center" width={250}>
+            <Card className="login-card">
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Grid2 container spacing={1}>
+                        <Grid2 size={12}>
+                            <Typography align="center" variant="h6" className="login-title">Sign in</Typography>
+                        </Grid2>
+                        <Grid2 size={12}>
+                            <TextField
+                                error={!!errors.email}
+                                helperText={errors.email?.message}
+                                size="small"
+                                label="Email"
+                                className="input-field"
+                                {...register("email", {
+                                    required: true,
+                                    pattern: {
+                                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                        message: 'Invalid email',
+                                    },
+                                })}
+                            />
+                        </Grid2>
+                        <Grid2 size={12}>
+                            <TextField
+                                error={!!errors.password}
+                                helperText={errors.password?.message}
+                                type="password"
+                                size="small"
+                                label="Password"
+                                className="input-field"
+                                {...register("password", {
+                                    required: true,
+                                    minLength: { value: 5, message: "Min 5 chars" },
+                                    maxLength: { value: 12, message: "Max 12 chars" },
+                                })}
+                            />
+                        </Grid2>
+                        <Grid2 size={12}>
+                            <LoadingButton
+                                loading={loading}
+                                type="submit"
+                                className="login-btn"
+                                variant="outlined"
+                            >
+                                Login
+                            </LoadingButton>
+                        </Grid2>
+                    </Grid2>
+                </form>
+                <Snackbar open={showSnackbar} autoHideDuration={2000} onClose={handleCloseErrorSnackbar}>
+                    <Alert severity={authMessageSeverity}>{authResultMessage}</Alert>
+                </Snackbar>
+            </Card>
+        </Box>
+    </>
 }

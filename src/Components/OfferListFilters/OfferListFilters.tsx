@@ -76,7 +76,12 @@ export const OfferListFilters = ({fetchOffers}: OfferListFilters) => {
                         selected={selectedTechnologies}
                         setSelected={setSelectedTechnologies}
                     />
-                    <Button variant="outlined" sx={{ width: 231 }} onClick={handleSearch}>
+                    <Button
+                        variant="outlined"
+                        sx={{ width: 231 }}
+                        onClick={handleSearch}
+                        /*todo disable the button if is loading*/
+                    >
                         Search
                     </Button>
                 </Grid2>

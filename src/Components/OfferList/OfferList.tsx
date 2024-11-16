@@ -1,6 +1,6 @@
 import React, {BaseSyntheticEvent, useState} from 'react';
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
-import {Chip, IconButton} from "@mui/material";
+import {Box, Chip, IconButton} from "@mui/material";
 import './OfferList.css';
 import InfoIcon from "@mui/icons-material/Info";
 import {OfferListModel} from "./OfferListModel";
@@ -60,7 +60,7 @@ export const OfferList = ({offers, loading}: OfferListProps) => {
     ];
 
     return (
-        <div className='offer-list'>
+        <Box className='offer-list'>
             <DataGrid
                 loading={loading}
                 slotProps={{
@@ -71,8 +71,9 @@ export const OfferList = ({offers, loading}: OfferListProps) => {
                 }}
                 rows={offers}
                 columns={columns}
+                autoHeight={true}
             />
             {offerId ? <OfferDetailsModal open={open} handleClose={handleClose} offerId={offerId}/> : null}
-        </div>
+        </Box>
     );
 }

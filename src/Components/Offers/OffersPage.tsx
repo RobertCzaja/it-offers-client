@@ -25,7 +25,7 @@ export const OffersPage = () => {
                 <Typography variant="h4" gutterBottom>OffersPage</Typography>
             </Grid2>
             <Grid2 size={12}>
-                <OfferListFilters fetchOffers={fetchOffers}/>
+                <OfferListFilters loading={loading} fetchOffers={fetchOffers}/>
             </Grid2>
             <Grid2 size={12}>
                 <OfferList loading={loading} offers={offers}/>

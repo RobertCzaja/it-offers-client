@@ -3,18 +3,20 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {Dayjs} from "dayjs";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import {Button, Grid2, ToggleButton, ToggleButtonGroup} from "@mui/material";
+import { Grid2, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import './OfferListFilters.css';
 import {OffersListFilters, PublishedAtScope} from "./OfferListFiltersModel";
 import {MultiSelect} from "../../Common/MultiSelect/MultiSelect";
 import {JobTechnologies} from "./JobTechnologies";
 import {DateScope, DateScopeType} from "./DateScope";
+import {LoadingButton} from "@mui/lab";
 
 interface OfferListFilters {
     fetchOffers: ({from, to, technologies}: OffersListFilters) => void;
+    loading: boolean;
 }
 
-export const OfferListFilters = ({fetchOffers}: OfferListFilters) => {
+export const OfferListFilters = ({fetchOffers, loading}: OfferListFilters) => {
     const [publishedAtFrom, setPublishedAtFrom] = useState<Dayjs|null>(null);
     const [publishedAtTo, setPublishedAtTo] = useState<Dayjs|null>(null);
     const [publishedAtScope, setPublishedAtScope] = useState<PublishedAtScope|null>(null);
@@ -76,14 +78,15 @@ export const OfferListFilters = ({fetchOffers}: OfferListFilters) => {
                         selected={selectedTechnologies}
                         setSelected={setSelectedTechnologies}
                     />
-                    <Button
-                        variant="outlined"
+                    <LoadingButton
+                        loading={loading}
+                        type="submit"
                         sx={{ width: 231 }}
                         onClick={handleSearch}
-                        /*todo disable the button if is loading*/
+                        variant="outlined"
                     >
                         Search
-                    </Button>
+                    </LoadingButton>
                 </Grid2>
             </Grid2>
         </div>

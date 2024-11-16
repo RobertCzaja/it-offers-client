@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {
-    Alert,
+    Alert, Box, Card,
     Grid2, Snackbar,
     TextField
 } from "@mui/material";
@@ -11,6 +11,8 @@ import {LoadingButton} from "@mui/lab";
 import {saveToken} from "./TokenRepository";
 import {AxiosError} from "axios";
 import {AlertColor} from "@mui/material/Alert/Alert";
+import Typography from "@mui/material/Typography";
+import './LoginForm.css';
 
 type LoginFormValues = {
     email: string
@@ -41,6 +43,8 @@ export const LoginForm = () => {
             setAuthResultMessage('Successfully logged');
             setShowSnackbar(true);
             setAuthMessageSeverity('success');
+            // todo clear email and password state
+            // todo redirect to offers page
         }).catch((errorResponse: AxiosError) => {
             switch (errorResponse.status) {
                 case 401:
@@ -56,46 +60,64 @@ export const LoginForm = () => {
         });
     }
 
-    return <>
+    return <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width={250}
+    >
+        <Card className="login-card">
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid2 container spacing={1} sx={{mt: 1, ml: 2}}>
-                <TextField
-                    error={!!errors.email}
-                    helperText={errors.email?.message}
-                    size="small"
-                    label="Email"
-                    {...register("email", {
-                        required: true,
-                        pattern: {
-                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                            message: 'Invalid email',
-                        },
-                    })}
-                />
-                <TextField
-                    error={!!errors.password}
-                    helperText={errors.password?.message}
-                    type="password"
-                    size="small"
-                    label="Password"
-                    {...register("password", {
-                        required: true,
-                        minLength: { value: 5, message: "Min 5 chars" },
-                        maxLength: { value: 12, message: "Max 12 chars" },
-                    })}
-                />
-                <LoadingButton
-                    loading={loading}
-                    type="submit"
-                    style={{maxHeight: 40}}
-                    variant="outlined"
-                >
-                    Login
-                </LoadingButton>
+            <Grid2 container spacing={1}>
+                <Grid2 size={12}>
+                    <Typography align="center" variant="h6" className="login-title">Sign in</Typography>
+                </Grid2>
+                <Grid2 size={12}>
+                    <TextField
+                        error={!!errors.email}
+                        helperText={errors.email?.message}
+                        size="small"
+                        label="Email"
+                        className="input-field"
+                        {...register("email", {
+                            required: true,
+                            pattern: {
+                                value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                message: 'Invalid email',
+                            },
+                        })}
+                    />
+                </Grid2>
+                <Grid2 size={12}>
+                    <TextField
+                        error={!!errors.password}
+                        helperText={errors.password?.message}
+                        type="password"
+                        size="small"
+                        label="Password"
+                        className="input-field"
+                        {...register("password", {
+                            required: true,
+                            minLength: { value: 5, message: "Min 5 chars" },
+                            maxLength: { value: 12, message: "Max 12 chars" },
+                        })}
+                    />
+                </Grid2>
+                <Grid2 size={12}>
+                    <LoadingButton
+                        loading={loading}
+                        type="submit"
+                        className="login-btn"
+                        variant="outlined"
+                    >
+                        Login
+                    </LoadingButton>
+                </Grid2>
             </Grid2>
         </form>
         <Snackbar open={showSnackbar} autoHideDuration={2000} onClose={handleCloseErrorSnackbar}>
             <Alert severity={authMessageSeverity}>{authResultMessage}</Alert>
         </Snackbar>
-    </>
+        </Card>
+    </Box>
 }

@@ -1,0 +1,16 @@
+.login-card {
+    padding: 1em
+}
+
+.login-title {
+    padding-bottom: 1em;
+}
+
+.input-field {
+    width: 100%;
+    min-height: 4em;
+}
+
+.login-btn {
+    width: 100%;
+}

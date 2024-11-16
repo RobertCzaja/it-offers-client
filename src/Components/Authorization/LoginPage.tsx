@@ -1,6 +1,17 @@
 import React from 'react';
+import {LoginForm} from "./LoginForm";
+import Box from "@mui/material/Box";
+
 export const LoginPage = () => {
     return <>
-        Login Page
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="90vh"
+        >
+            <LoginForm />
+        </Box>
+
     </>
 }

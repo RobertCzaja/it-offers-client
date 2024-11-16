@@ -7,7 +7,7 @@ export const LoginPage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        minHeight="90vh"
+        minHeight="100vh"
     >
         <LoginForm/>
     </Box>

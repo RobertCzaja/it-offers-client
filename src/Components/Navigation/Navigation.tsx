@@ -13,7 +13,6 @@ export const Navigation = () => {
                 <Toolbar>
                     <Button color="inherit" href={InternalRoutes.HOME}>Home</Button>
                     <Button color="inherit" href={InternalRoutes.OFFERS}>Offers</Button>
-                    <Button color="inherit" href={InternalRoutes.LOGIN}>Login</Button>
                     <Button color="inherit" onClick={() => {auth.logout()}}>Logout</Button>
                 </Toolbar>
             </AppBar>

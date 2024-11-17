@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {OfferListFilters} from "../OfferListFilters/OfferListFilters";
 import Typography from "@mui/material/Typography";
 import {OfferList} from "./OfferList";
-import {OfferListModel, OfferListResponse} from "./OfferListModel";
+import {OfferListItemResponse, OfferListModel, OfferListResponse} from "./OfferListModel";
 import {OffersListFilters} from "../OfferListFilters/OfferListFiltersModel";
 import {FetchOffersList} from "./FetchOffersList";
 import {OfferListMapper} from "./OfferListMapper";
@@ -12,12 +12,14 @@ import {OfferReportModal} from "../OfferReport/OfferReportModal";
 
 export const OffersPage = () => {
     const [offers, setOffers] = useState<OfferListModel[]>([]);
+    const [rawOffers, setRawOffers] = useState<OfferListItemResponse[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [showReportModal, setShowReportModal] = useState<boolean>(false);
 
     const fetchOffers = (filters: OffersListFilters): void => {
         setLoading(true);
         FetchOffersList(filters).then((offersList: OfferListResponse) => {
+            setRawOffers(offersList.list);
             setOffers(OfferListMapper(offersList));
             setLoading(false);
         })
@@ -41,6 +43,6 @@ export const OffersPage = () => {
                 <OfferList loading={loading} offers={offers}/>
             </Grid2>
         </Grid2>
-        <OfferReportModal open={showReportModal} handleClose={closeReportModal} />
+        <OfferReportModal offers={rawOffers} open={showReportModal} handleClose={closeReportModal} />
     </>
 }

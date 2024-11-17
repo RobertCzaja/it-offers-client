@@ -14,7 +14,7 @@ export const OfferDetails = ({offerId}: OfferDetailsProps) => {
     const [offerDetails, setOfferDetails] = useState<OfferDetailsResponse>();
 
     useEffect(() => {
-        FetchOfferDetails(offerId).then(response => setOfferDetails(response));
+        //FetchOfferDetails(offerId).then(response => setOfferDetails(response));
     }, [offerId]);
 
     return <>

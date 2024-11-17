@@ -4,6 +4,8 @@ import {CategoriesReport, CategoryReportItem, CategoryStats, CategoriesSeries} f
 import {AxisOptions, Chart} from "react-charts";
 import React from "react";
 import Typography from "@mui/material/Typography";
+import {Box} from "@mui/material";
+import './OfferReportModal.css';
 
 interface OfferReportModalProps {
     open: boolean;
@@ -49,13 +51,15 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
         []
     )
 
-    const dataSeries2: CategoriesSeries[] = [];
+    const dataSeries: CategoriesSeries[] = [];
     sortableCategories.slice(0, 20).forEach((category: CategoryReportItem) => {
-        dataSeries2.push({label: category.name, data: [{name: category.name, amount: category.amount}]});
+        dataSeries.push({label: category.name, data: [{name: category.name, amount: category.amount}]});
     });
 
     return <CommonDialog open={open} handleClose={handleClose} title="Report">
         <Typography>Most popular skills</Typography>
-        <Chart options={{data: dataSeries2, primaryAxis, secondaryAxes,}}/>
+        <Box className='chart-container'>
+            <Chart options={{data: dataSeries, primaryAxis, secondaryAxes,}}/>
+        </Box>
     </CommonDialog>
 }

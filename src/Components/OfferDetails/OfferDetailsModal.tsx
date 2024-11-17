@@ -27,34 +27,13 @@ export const OfferDetailsModal = ({open, handleClose, offerId}: OfferDetailsModa
                     <Tab label="Salary" {...a11yProps(2, 'offer-details')} />
                 </Tabs>
             </Box>
-            <CommonTabPanel
-                containerClass='offer-details-tab-panel'
-                ariaLabel='offer-details-tab'
-                boxClass='offer-details-tab-panel-box'
-                name='offer-details-tabpanel'
-                value={value}
-                index={0}
-            >
+            <CommonTabPanel name='offer-details-tab' value={value} index={0}>
                 <OfferDetails offerId={offerId}></OfferDetails>
             </CommonTabPanel>
-            <CommonTabPanel
-                containerClass='offer-details-tab-panel'
-                ariaLabel='offer-details-tab'
-                boxClass='offer-details-tab-panel-box'
-                name='offer-details-tabpanel'
-                value={value}
-                index={1}
-            >
+            <CommonTabPanel name='offer-details-tab' value={value} index={1}>
                 Categories
             </CommonTabPanel>
-            <CommonTabPanel
-                containerClass='offer-details-tab-panel'
-                ariaLabel='offer-details-tab'
-                boxClass='offer-details-tab-panel-box'
-                name='offer-details-tabpanel'
-                value={value}
-                index={2}
-            >
+            <CommonTabPanel name='offer-details-tab' value={value} index={2}>
                 Salary
             </CommonTabPanel>
         </CommonDialog>

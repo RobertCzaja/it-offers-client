@@ -6,24 +6,21 @@ interface TabPanelProps {
     index: number;
     value: number;
     name: string;
-    boxClass: string;
-    containerClass: string;
-    ariaLabel: string;
 }
 
 export function CommonTabPanel(props: TabPanelProps) {
-    const { containerClass, ariaLabel, boxClass, name, children, value, index, ...other } = props;
+    const { name, children, value, index, ...other } = props;
 
     return (
         <div
             role="tabpanel"
             hidden={value !== index}
-            id={`${name}-${index}`}
-            aria-labelledby={`${ariaLabel}-${index}`}
-            className={containerClass}
+            id={`${name}panel-${index}`}
+            aria-labelledby={`${name}-${index}`}
+            className={`${name}-panel`}
             {...other}
         >
-            {value === index && <Box className={boxClass}>{children}</Box>}
+            {value === index && <Box className={`${name}-panel-box`}>{children}</Box>}
         </div>
     );
 }

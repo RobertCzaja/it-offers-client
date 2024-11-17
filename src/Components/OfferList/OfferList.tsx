@@ -73,7 +73,7 @@ export const OfferList = ({offers, loading}: OfferListProps) => {
                 columns={columns}
                 autoHeight={true}
             />
-            {offerId ? <OfferDetailsModal open={open} handleClose={handleClose} offerId={offerId}/> : null}
+            {offerId && <OfferDetailsModal open={open} handleClose={handleClose} offerId={offerId}/>}
         </Box>
     );
 }

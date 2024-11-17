@@ -1,14 +1,8 @@
 import React from 'react';
-import Button from '@mui/material/Button';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import {Box, Tab, Tabs} from "@mui/material";
 import {OfferDetails} from "./OfferDetails";
 import './OfferDetailsModal.css';
-import {BootstrapDialog} from "../../Common/Dialog/BootstrapDialog";
+import {CommonDialog} from "../../Common/Dialog/CommonDialog";
 
 interface OfferDetailsModalProps {
     open: boolean;
@@ -54,57 +48,23 @@ export const OfferDetailsModal = ({open, handleClose, offerId}: OfferDetailsModa
     };
 
     return (
-        <BootstrapDialog
-            onClose={handleClose}
-            aria-labelledby="customized-dialog-title"
-            open={open}
-            maxWidth='xl'
-        >
-            <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-                Offer
-            </DialogTitle>
-            <IconButton
-                aria-label="close"
-                onClick={handleClose}
-                sx={(theme) => ({
-                    position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    color: theme.palette.grey[500],
-                })}
-            >
-                <CloseIcon />
-            </IconButton>
-            <DialogContent dividers sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                m: 'auto',
-                width: '80vw',
-                height: '80vh'
-            }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="offer details">
-                        <Tab label="Details" {...a11yProps(0)} />
-                        <Tab label="Categories" {...a11yProps(1)} />
-                        <Tab label="Salary" {...a11yProps(2)} />
-                    </Tabs>
-                </Box>
-                <OfferDetailsTabPanel  value={value} index={0}>
-                    <OfferDetails offerId={offerId}></OfferDetails>
-                </OfferDetailsTabPanel>
-                <OfferDetailsTabPanel value={value} index={1}>
-                    Categories
-                </OfferDetailsTabPanel>
-                <OfferDetailsTabPanel value={value} index={2}>
-                    Salary
-                </OfferDetailsTabPanel>
-
-            </DialogContent>
-            <DialogActions>
-                <Button autoFocus onClick={handleClose}>
-                    Close
-                </Button>
-            </DialogActions>
-        </BootstrapDialog>
+        <CommonDialog open={open} handleClose={handleClose} title="Offer">
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Tabs value={value} onChange={handleChange} aria-label="offer details">
+                    <Tab label="Details" {...a11yProps(0)} />
+                    <Tab label="Categories" {...a11yProps(1)} />
+                    <Tab label="Salary" {...a11yProps(2)} />
+                </Tabs>
+            </Box>
+            <OfferDetailsTabPanel  value={value} index={0}>
+                <OfferDetails offerId={offerId}></OfferDetails>
+            </OfferDetailsTabPanel>
+            <OfferDetailsTabPanel value={value} index={1}>
+                Categories
+            </OfferDetailsTabPanel>
+            <OfferDetailsTabPanel value={value} index={2}>
+                Salary
+            </OfferDetailsTabPanel>
+        </CommonDialog>
     );
 }

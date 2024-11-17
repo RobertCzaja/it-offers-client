@@ -1,11 +1,34 @@
 import {CommonDialog} from "../../Common/Dialog/CommonDialog";
 import {OfferCategory, OfferListItemResponse} from "../OfferList/OfferListModel";
-import {CategoriesReport, CategoryReportItem, CategoryStats, CategoriesSeries} from "./OfferReportModel";
-import {AxisOptions, Chart} from "react-charts";
+import {CategoriesReport, CategoryReportItem} from "./OfferReportModel";
 import React from "react";
 import Typography from "@mui/material/Typography";
 import {Box} from "@mui/material";
 import './OfferReportModal.css';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    BarElement,
+    LinearScale,
+    PointElement,
+    Title,
+    Tooltip,
+    Legend,
+    Colors,
+} from 'chart.js';
+import {Bar} from "react-chartjs-2";
+import {randomColors} from "./BarColors";
+
+ChartJS.register(
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    Title,
+    Tooltip,
+    Legend,
+    Colors
+);
 
 interface OfferReportModalProps {
     open: boolean;
@@ -14,7 +37,7 @@ interface OfferReportModalProps {
 }
 
 export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalProps) => {
-
+    const LIMIT: number = 20;
     const categoryReports: CategoriesReport = {};
     const sortableCategories: CategoryReportItem[] = [];
 
@@ -32,34 +55,26 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
         sortableCategories.push({...categoryReports[categoryId], ...{id: categoryId}});
     }
     sortableCategories.sort(
-        (categort1: CategoryReportItem , categort2: CategoryReportItem) => categort2.amount > categort1.amount ? 1 : -1
+        (category1: CategoryReportItem , category2: CategoryReportItem) => category2.amount > category1.amount ? 1 : -1
     );
 
-    const primaryAxis = React.useMemo(
-        (): AxisOptions<CategoryStats> => ({
-            getValue: datum => datum.name,
-        }),
-        []
-    )
-
-    const secondaryAxes = React.useMemo(
-        (): AxisOptions<CategoryStats>[] => [
+    const options = {};
+    const data = {
+        labels: sortableCategories.slice(0, LIMIT).map(item => item.name),
+        datasets: [
             {
-                getValue: datum => datum.amount,
-            },
+                label: "Amount of offers",
+                data: sortableCategories.slice(0, LIMIT).map(item => item.amount),
+                borderWidth: 1,
+                backgroundColor: randomColors(),
+            }
         ],
-        []
-    )
-
-    const dataSeries: CategoriesSeries[] = [];
-    sortableCategories.slice(0, 20).forEach((category: CategoryReportItem) => {
-        dataSeries.push({label: category.name, data: [{name: category.name, amount: category.amount}]});
-    });
+    };
 
     return <CommonDialog open={open} handleClose={handleClose} title="Report">
         <Typography>Most popular skills</Typography>
         <Box className='chart-container'>
-            <Chart options={{data: dataSeries, primaryAxis, secondaryAxes,}}/>
+            <Bar options={options}  data={data}/>
         </Box>
     </CommonDialog>
 }

@@ -54,17 +54,15 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
     for (const categoryId in categoryReports) {
         sortableCategories.push({...categoryReports[categoryId], ...{id: categoryId}});
     }
-    sortableCategories.sort(
-        (category1: CategoryReportItem , category2: CategoryReportItem) => category2.amount > category1.amount ? 1 : -1
-    );
+    sortableCategories.sort((category1: CategoryReportItem , category2: CategoryReportItem) => category2.amount > category1.amount ? 1 : -1);
+    const slicedSortableCategories: CategoryReportItem[] = sortableCategories.slice(0, LIMIT);
 
-    const options = {};
     const data = {
-        labels: sortableCategories.slice(0, LIMIT).map(item => item.name),
+        labels: slicedSortableCategories.map(item => item.name),
         datasets: [
             {
                 label: "Amount of offers",
-                data: sortableCategories.slice(0, LIMIT).map(item => item.amount),
+                data: slicedSortableCategories.map(item => item.amount),
                 borderWidth: 1,
                 backgroundColor: randomColors(),
             }
@@ -74,7 +72,7 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
     return <CommonDialog open={open} handleClose={handleClose} title="Report">
         <Typography>Most popular skills</Typography>
         <Box className='chart-container'>
-            <Bar options={options}  data={data}/>
+            <Bar options={{}}  data={data}/>
         </Box>
     </CommonDialog>
 }

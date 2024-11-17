@@ -10,7 +10,7 @@ const BarColors: string[] = [
     "#d63031","#feca57","#5f27cd","#54a0ff","#01a3a4"
 ]
 
-export function randomColors() {
+export function randomColors(): string[] {
     for (var i = BarColors.length - 1; i >= 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
         var temp = BarColors[i];

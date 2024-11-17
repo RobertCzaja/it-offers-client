@@ -1,8 +1,9 @@
 import {CommonDialog} from "../../Common/Dialog/CommonDialog";
-import {Box} from "@mui/material";
 import {OfferCategory, OfferListItemResponse} from "../OfferList/OfferListModel";
-import {CategoriesReport, CategoryReportItem} from "./OfferReportModel";
-
+import {CategoriesReport, CategoryReportItem, CategoryStats, CategoriesSeries} from "./OfferReportModel";
+import {AxisOptions, Chart} from "react-charts";
+import React from "react";
+import Typography from "@mui/material/Typography";
 
 interface OfferReportModalProps {
     open: boolean;
@@ -30,10 +31,31 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
     }
     sortableCategories.sort(
         (categort1: CategoryReportItem , categort2: CategoryReportItem) => categort2.amount > categort1.amount ? 1 : -1
+    );
+
+    const primaryAxis = React.useMemo(
+        (): AxisOptions<CategoryStats> => ({
+            getValue: datum => datum.name,
+        }),
+        []
     )
 
-    return <CommonDialog open={open} handleClose={handleClose} title="Report">
-        <Box>test</Box>
-    </CommonDialog>
+    const secondaryAxes = React.useMemo(
+        (): AxisOptions<CategoryStats>[] => [
+            {
+                getValue: datum => datum.amount,
+            },
+        ],
+        []
+    )
 
+    const dataSeries2: CategoriesSeries[] = [];
+    sortableCategories.slice(0, 20).forEach((category: CategoryReportItem) => {
+        dataSeries2.push({label: category.name, data: [{name: category.name, amount: category.amount}]});
+    });
+
+    return <CommonDialog open={open} handleClose={handleClose} title="Report">
+        <Typography>Most popular skills</Typography>
+        <Chart options={{data: dataSeries2, primaryAxis, secondaryAxes,}}/>
+    </CommonDialog>
 }

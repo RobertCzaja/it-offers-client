@@ -19,6 +19,7 @@ import {
 import {Bar} from "react-chartjs-2";
 import {randomColors} from "./BarColors";
 import {a11yProps, CommonTabPanel} from "../../Common/Tab/CommonTabPanel";
+import {OffersTimelineChart} from "./OffersTimelineChart";
 
 ChartJS.register(
     BarElement,
@@ -79,7 +80,7 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={activeTab} onChange={handleChange} aria-label="offer statistics">
                 <Tab label="Top Skills" {...a11yProps(0, 'offers-statistics')} />
-                <Tab label="Tab 2" {...a11yProps(1, 'offers-statistics')} />
+                <Tab label="Offers Timeline" {...a11yProps(1, 'offers-statistics')} />
                 <Tab label="Tab 3" {...a11yProps(1, 'offers-statistics')} />
             </Tabs>
         </Box>
@@ -91,7 +92,7 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
             </Box>
         </CommonTabPanel>
         <CommonTabPanel name='offers-statistics-tab' value={activeTab} index={1}>
-            Tab 2
+            <OffersTimelineChart offers={offers}/>
         </CommonTabPanel>
         <CommonTabPanel name='offers-statistics-tab' value={activeTab} index={2}>
             Tab 3

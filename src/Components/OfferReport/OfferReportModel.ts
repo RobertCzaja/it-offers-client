@@ -8,3 +8,11 @@ type CategoryReport = {
 }
 
 export type CategoryReportItem = CategoryReport & {id: string};
+
+export type OffersPerDay = {
+    [date: string]: OffersDayAmount;
+}
+
+type OffersDayAmount = {
+    [technology: string]: {amount: number};
+}

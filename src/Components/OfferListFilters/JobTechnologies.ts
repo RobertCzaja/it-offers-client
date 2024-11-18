@@ -7,4 +7,5 @@ export const JobTechnologies = (): string[] => [
     'net',
     'javascript',
     'admin',
+    'go',
 ]

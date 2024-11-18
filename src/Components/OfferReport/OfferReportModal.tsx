@@ -3,7 +3,7 @@ import {OfferCategory, OfferListItemResponse} from "../OfferList/OfferListModel"
 import {CategoriesReport, CategoryReportItem} from "./OfferReportModel";
 import React from "react";
 import Typography from "@mui/material/Typography";
-import {Box} from "@mui/material";
+import {Box, Tab, Tabs} from "@mui/material";
 import './OfferReportModal.css';
 import {
     Chart as ChartJS,
@@ -18,6 +18,7 @@ import {
 } from 'chart.js';
 import {Bar} from "react-chartjs-2";
 import {randomColors} from "./BarColors";
+import {a11yProps, CommonTabPanel} from "../../Common/Tab/CommonTabPanel";
 
 ChartJS.register(
     BarElement,
@@ -40,6 +41,11 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
     const LIMIT: number = 20;
     const categoryReports: CategoriesReport = {};
     const sortableCategories: CategoryReportItem[] = [];
+    const [activeTab, setActiveTab] = React.useState(0);
+
+    const handleChange = (event: React.SyntheticEvent, activeTab: number) => {
+        setActiveTab(activeTab);
+    };
 
     offers.forEach((offer: OfferListItemResponse) => {
         offer.categories.forEach((category: OfferCategory) => {
@@ -70,9 +76,25 @@ export const OfferReportModal = ({offers, open, handleClose}: OfferReportModalPr
     };
 
     return <CommonDialog open={open} handleClose={handleClose} title="Report">
-        <Typography>Most popular skills</Typography>
-        <Box className='chart-container'>
-            <Bar options={{}}  data={data}/>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs value={activeTab} onChange={handleChange} aria-label="offer statistics">
+                <Tab label="Top Skills" {...a11yProps(0, 'offers-statistics')} />
+                <Tab label="Tab 2" {...a11yProps(1, 'offers-statistics')} />
+                <Tab label="Tab 3" {...a11yProps(1, 'offers-statistics')} />
+            </Tabs>
         </Box>
+
+        <CommonTabPanel name='offers-statistics-tab' value={activeTab} index={0}>
+            <Typography>Most popular skills</Typography>
+            <Box className='chart-container'>
+                <Bar options={{}}  data={data}/>
+            </Box>
+        </CommonTabPanel>
+        <CommonTabPanel name='offers-statistics-tab' value={activeTab} index={1}>
+            Tab 2
+        </CommonTabPanel>
+        <CommonTabPanel name='offers-statistics-tab' value={activeTab} index={2}>
+            Tab 3
+        </CommonTabPanel>
     </CommonDialog>
 }

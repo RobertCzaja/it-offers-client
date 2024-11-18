@@ -16,3 +16,12 @@ export type OffersPerDay = {
 type OffersDayAmount = {
     [technology: string]: {amount: number};
 }
+
+export type OffersTimelineChartData = {
+    labels: string[];
+    technologies: {[technology: string]: number[]}
+}
+
+export type ChartDatasets = {
+    label: string, data: number[]
+}[]

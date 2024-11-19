@@ -32,6 +32,8 @@ export const OffersTimelineChart = ({offers}: OffersTimelineChart) => {
     const allTechnologies: string[] = [];
     const offersTimelineData: OffersTimelineChartData = {labels: [], technologies: {}};
 
+    // todo add real dates frame
+
     offers.forEach((offer: OfferListItemResponse) => {
         const date: string = offer.publishedAt.split('T')[0];
 
@@ -72,10 +74,19 @@ export const OffersTimelineChart = ({offers}: OffersTimelineChart) => {
 
     const data = {
         labels: offersTimelineData.labels,
-        datasets: datasets
+        datasets: datasets,
     };
 
+    const options = {
+        // scales: {
+        //     x: {
+        //         type: 'category',
+        //         labels: ['January', 'February', 'March', 'April', 'May', 'June']
+        //     }
+        // }
+    }
+
     return <>
-        <Line options={{}} data={data} />
+        <Line options={options} data={data} />
     </>
 }
